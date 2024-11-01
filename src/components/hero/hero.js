@@ -3,6 +3,7 @@ import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './hero.css';
+import logoImage from '../../assets/logo.png';
 
 const Hero = () => {
     const theme = useTheme();
@@ -21,6 +22,10 @@ const Hero = () => {
                 color: theme.palette.text.primary,
             }}
         >
+            <div className='logo'>
+                <img src={logoImage} alt="Logo" className="logo-image" />
+                <span className="logo-text">Marc Sancho</span>
+            </div>
             <div className="perspective-text" style={{position: 'absolute', top: '25%', left: '20%'}}>
                 <div className="perspective-line">
                     <p></p>

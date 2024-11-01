@@ -18,6 +18,29 @@ body {
     overflow: hidden;
 }
 
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+}
+
 .perspective-text {
     color: #FFFFFF; /* Texto en blanco para contraste */
     font-family: 'Arial', sans-serif;
@@ -70,7 +93,7 @@ a {
 .perspective-line:nth-child(2) { left: 58px; }
 .perspective-line:nth-child(3) { left: 87px; }
 .perspective-line:nth-child(4) { left: 116px; }
-.perspective-line:nth-child(5) { left: 145px; padding-bottom: 1px; }
+.perspective-line:nth-child(5) { left: 145px; padding-bottom: 2px; }
 
 .ocean {
     height: 5%;
