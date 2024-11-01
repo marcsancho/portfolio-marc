@@ -1,9 +1,9 @@
-// src/components/hero.js
+// src/components/hero/hero.js
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './hero.css';
-import logoImage from '../../assets/logo.png';
+import logoImage from '../../assets/icon.png'; // Adjust the path according to your project structure
 
 const Hero = () => {
     const theme = useTheme();
