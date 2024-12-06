@@ -1,55 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-const BackgroundWrapper = styled(Box)({
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  zIndex: 0,
-  overflow: 'hidden',
-});
-
-const WaveContainer = styled(Box)({
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  width: '100%',
-  height: '198px',
-  overflow: 'hidden',
-});
-
-const Wave = styled(Box)(({ theme, delay = 0 }) => ({
-  background: `linear-gradient(45deg, ${theme.palette.primary.dark}40, ${theme.palette.secondary.main}40)`,
-  width: '200%',
-  height: '100%',
-  position: 'absolute',
-  animation: 'wave 15s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite',
-  animationDelay: `${delay}s`,
-  transform: 'translate3d(0, 0, 0)',
-  opacity: 0.5,
-
-  '@keyframes wave': {
-    '0%': { transform: 'translateX(0)' },
-    '50%': { transform: 'translateX(-25%)' },
-    '100%': { transform: 'translateX(-50%)' },
-  },
-}));
-
-const GradientOverlay = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: `linear-gradient(180deg, 
-    ${theme.palette.background.default} 0%, 
-    ${theme.palette.background.default}99 40%,
-    ${theme.palette.primary.dark}20 100%)`,
-  zIndex: 1,
-}));
 
 const HeroContainer = styled(Box)({
   height: 'calc(100vh - 64px)',
@@ -59,6 +10,14 @@ const HeroContainer = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   overflow: 'hidden',
+});
+
+const Canvas = styled('canvas')({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
 });
 
 const PerspectiveText = styled('div')({
@@ -113,6 +72,103 @@ const TextElement = styled('p')({
   transition: 'all 0.3s ease-in-out',
 });
 
+const NetworkBackground = () => {
+  const canvasRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const particlesRef = useRef([]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    const initParticles = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particleCount = (canvas.width * canvas.height) / 22500;
+
+      particlesRef.current = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        speed: 0.5,
+        size: Math.random() * 2 + 1,
+        directionX: Math.random() - 0.5,
+        directionY: Math.random() - 0.5,
+        hue: Math.random() * 30 - 15, // Color variation
+      }));
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particlesRef.current.forEach((particle, i) => {
+        particle.x += particle.directionX * particle.speed;
+        particle.y += particle.directionY * particle.speed;
+
+        const dx = particle.x - mouseRef.current.x;
+        const dy = particle.y - mouseRef.current.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 80) {
+          const angle = Math.atan2(dy, dx);
+          particle.directionX = Math.cos(angle);
+          particle.directionY = Math.sin(angle);
+          particle.speed = 0.3;
+          ctx.fillStyle = '#9bd9b2';
+        } else {
+          particle.speed *= 0.95;
+          if (particle.speed < 0.2) particle.speed = 0.2;
+          ctx.fillStyle = `hsla(174, ${40 + particle.hue}%, 40%, 0.8)`;
+        }
+
+        if (particle.x < 0 || particle.x > canvas.width) particle.directionX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.directionY *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw connections
+        particlesRef.current.slice(i + 1).forEach((p2) => {
+          const dx = particle.x - p2.x;
+          const dy = particle.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(155, 217, 178, ${0.15 * (1 - dist / 100)})`;
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        });
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    const handleMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      };
+    };
+
+    canvas.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', initParticles);
+
+    initParticles();
+    animate();
+
+    return () => {
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', initParticles);
+    };
+  }, []);
+
+  return <Canvas ref={canvasRef} />;
+};
+
 const menuItems = [
   { text: 'ABOUT ME', id: 'about' },
   { text: 'PROJECTS & SKILLS', id: 'projects' },
@@ -122,20 +178,9 @@ const menuItems = [
 ];
 
 const Hero = ({ onNavigate }) => {
-  const renderAnimatedBackground = () => (
-    <BackgroundWrapper>
-      <GradientOverlay />
-      <WaveContainer>
-        <Wave />
-        <Wave delay={-2} sx={{ top: '20px', opacity: 0.3 }} />
-        <Wave delay={-5} sx={{ top: '40px', opacity: 0.2 }} />
-      </WaveContainer>
-    </BackgroundWrapper>
-  );
-
   return (
     <HeroContainer>
-      {renderAnimatedBackground()}
+      <NetworkBackground />
       <PerspectiveText>
         {menuItems.map((item, index) => (
           <PerspectiveLine key={index} index={index}>
