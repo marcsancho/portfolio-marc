@@ -1,14 +1,18 @@
-// src/index.js
+import { CssBaseline } from '@mui/material';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from '@mui/material/styles';
 import App from './App';
 import theme from './theme';
-import { ThemeProvider, CssBaseline } from '@mui/material';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
+  <React.StrictMode>
     <ThemeProvider theme={theme}>
-        <CssBaseline /> {/* Reseteo de estilos según el tema */}
-        <App />
-    </ThemeProvider>,
-    document.getElementById('root')
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
 );

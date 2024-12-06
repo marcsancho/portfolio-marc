@@ -1,73 +1,72 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-// Import components
 import Header from './components/layout/Header/Header';
-import Hero from './components/sections/Hero/Hero';
-import About from './components/sections/About/About';
-import Projects from './components/sections/Projects/Projects';
-import Skills from './components/sections/Skills/Skills';
-import Contact from './components/sections/Contact/Contact';
+import Hero from './components/layout/Hero/Hero';
+import About from './components/layout/About/About';
+import Projects from './components/layout/Projects/Projects';
+import Skills from './components/layout/Skills/Skills';
+import Contact from './components/layout/Contact/Contact';
 
-// Styled Components
-styled('div')(({ theme }) => ({
-    position: 'fixed',
-    top: 20,
-    left: 20,
-    display: 'flex',
-    alignItems: 'center',
-    gap: theme.spacing(1),
-    zIndex: 10,
-}));
 const MainContainer = styled(Box)(({ theme }) => ({
-    minHeight: '100vh',
-    position: 'relative',
-    backgroundColor: theme.palette.background.default,
+  minHeight: '100vh',
+  width: '100%',
+  backgroundColor: theme.palette.background.default,
+  overflow: 'hidden',
 }));
 
-const SectionsContainer = styled('div')({
-    position: 'relative',
-    zIndex: 1,
+const ContentWrapper = styled(Box)({
+  marginTop: '64px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  width: '100%',
+});
+
+const Section = styled('section')({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 const App = () => {
-    const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-    return (
-        <MainContainer>
-            {/* Header */}
-            <Header />
+  return (
+    <MainContainer>
+      <Header />
+      <ContentWrapper>
+        <Section id="hero">
+          <Hero onNavigate={scrollToSection} />
+        </Section>
 
-            {/* Main Content */}
-            <SectionsContainer>
-                <section id="hero">
-                    <Hero onNavigate={scrollToSection} />
-                </section>
+        <Container maxWidth="lg">
+          <Section id="about">
+            <About />
+          </Section>
 
-                <section id="about">
-                    <About />
-                </section>
+          <Section id="projects">
+            <Projects />
+          </Section>
 
-                <section id="projects">
-                    <Projects />
-                </section>
+          <Section id="skills">
+            <Skills />
+          </Section>
 
-                <section id="skills">
-                    <Skills />
-                </section>
-
-                <section id="contact">
-                    <Contact />
-                </section>
-            </SectionsContainer>
-        </MainContainer>
-    );
+          <Section id="contact">
+            <Contact />
+          </Section>
+        </Container>
+      </ContentWrapper>
+    </MainContainer>
+  );
 };
 
 export default App;

@@ -29,7 +29,7 @@
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "warn",
+    "react/prop-types": "off",
     "no-unused-vars": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "prettier/prettier": ["error", {
