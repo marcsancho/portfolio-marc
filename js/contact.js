@@ -18,6 +18,7 @@ export function initContact() {
       } catch {
         clearTimeout(timer);
         status.textContent = '';
+        location.href = link.href;
       }
     });
   });
