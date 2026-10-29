@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Unblurred Casal screenshots must never be committed
+assets/casal/originals/
