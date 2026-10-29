@@ -47,6 +47,7 @@ export function initReveal({ instant }) {
     );
     targets.forEach((el) => reveal.observe(el));
   }
+  document.documentElement.classList.add('reveal-ready'); // disarms the CSS fallback
 
   const current = new IntersectionObserver(
     (entries) => {

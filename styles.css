@@ -164,10 +164,14 @@ html[data-pointer='coarse'] .cursor-ring {
     translate 0.6s;
 }
 
-/* Hidden from the first paint (inline head script); the animation un-hides it if the module never reveals it. */
+/* Hidden from the first paint (inline head script). */
 html.js [data-reveal]:not(.is-visible) {
   opacity: 0;
   translate: 0 24px;
+}
+
+/* Safety net for a reveal module that never ran; once it has (reveal-ready) it alone decides. */
+html.js:not(.reveal-ready) [data-reveal]:not(.is-visible) {
   animation: reveal-fallback 0s 4s forwards;
 }
 
