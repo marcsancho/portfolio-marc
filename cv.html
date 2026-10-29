@@ -20,7 +20,7 @@
 
       @page {
         size: A4;
-        margin: 12mm 14mm;
+        margin: 10mm 13mm;
       }
 
       * {
@@ -38,8 +38,8 @@
         padding: 12mm 0;
         color: var(--ink);
         font-family: var(--font-body);
-        font-size: 10pt;
-        line-height: 1.4;
+        font-size: 9.5pt;
+        line-height: 1.35;
         background: #fff;
       }
 
@@ -94,7 +94,7 @@
       }
 
       section {
-        margin-top: 4.5mm;
+        margin-top: 3.5mm;
       }
 
       h2 {
@@ -108,7 +108,7 @@
       }
 
       .profile {
-        font-size: 10.5pt;
+        font-size: 10pt;
       }
 
       .job {
@@ -228,10 +228,9 @@
       <h2>Profile</h2>
       <p class="profile">
         Front-end developer with three years building large enterprise applications in Angular and
-        ExtJS at Serviceware, where I lead my team's shift to AI-first development: an agent
-        platform that plans, implements and reviews changes across our frontend repositories. I care
-        about work that is measured on real tickets, not demos, and about front-ends that stay fast
-        and accessible.
+        ExtJS at Serviceware, where I also lead the team's shift to AI-first development. On the
+        side I am building a SaaS from scratch, infrastructure included. I care about work measured
+        on real tickets, not demos, and about front-ends that stay fast and accessible.
       </p>
     </section>
 
@@ -261,21 +260,36 @@
         </li>
         <li>
           Automated tests with Playwright and Jest; code review and documentation across the
-          front-end projects. Internship Mar–Jun 2023, full-time since.
+          front-end projects. Built the team's Claude Code plugin: agents, skills, two MCP servers,
+          guard hooks. Internship Mar–Jun 2023, full-time since.
         </li>
       </ul>
     </section>
 
     <section class="project">
-      <h2>Project</h2>
+      <h2>Projects</h2>
       <div class="job">
+        <h3>
+          Own SaaS for Spanish SMEs
+          <span class="where">· founder &amp; developer, in development</span>
+        </h3>
+        <span class="when">2026 — present</span>
+      </div>
+      <p>
+        Multi-tenant invoicing platform around Spain's VeriFactu rules: NestJS, Prisma and
+        PostgreSQL, React + Vite front-end, Keycloak, NX monorepo. Railway with per-PR environments,
+        GitHub Actions gates, Sentry and Grafana. Agent-operated delivery: a tool gateway with RBAC
+        and autonomy levels, a git-backed board delegated to a self-hosted agent organisation, Jev
+        for triage.
+      </p>
+      <div class="job" style="margin-top: 2mm">
         <h3>Casal de Colònies <span class="where">· booking management for a summer camp</span></h3>
-        <span class="when">2025 — present</span>
+        <span class="when">2025</span>
       </div>
       <p>
         Portable desktop app (Next.js + Electron, SQLite via sql.js, Gmail API) for a camp in
-        Mallorca: school bookings, occupancy, deadlines and PDF agreements generated from templates
-        the client edits and maps itself. Delivered end to end and in production.
+        Mallorca: bookings, occupancy, deadlines and PDF agreements from templates the client edits
+        itself. Delivered end to end; in use.
       </p>
     </section>
 
@@ -284,6 +298,8 @@
       <dl class="skills">
         <dt>Front-end</dt>
         <dd>Angular, ExtJS, React, Next.js, Electron · TypeScript, JavaScript, HTML, CSS/SCSS</dd>
+        <dt>Back-end</dt>
+        <dd>NestJS, Prisma, PostgreSQL, Keycloak · Docker, Railway, GitHub Actions</dd>
         <dt>Tooling</dt>
         <dd>NX monorepo, Git, Azure DevOps, GitHub, CI/CD · Playwright, Jest, Vitest</dd>
         <dt>AI</dt>
@@ -322,6 +338,11 @@
         <h2>Languages &amp; availability</h2>
         <p>Spanish and Catalan, native · English, fluent.</p>
         <p>Open to remote or hybrid roles · based in Palma de Mallorca.</p>
+        <h2 style="margin-top: 3mm">Community</h2>
+        <p>
+          Serviceware Coding Convention 2023–2026 · Palma team hackathon 2025 · Booking.com
+          developer conference, Palma 2025.
+        </p>
       </section>
     </div>
 
