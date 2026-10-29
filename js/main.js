@@ -4,6 +4,7 @@ import { initConstellation } from './constellation.js';
 import { initContact } from './contact.js';
 import { initReveal } from './reveal.js';
 import { initTilt } from './tilt.js';
+import { initCursor } from './cursor.js';
 
 initHero({ enabled: prefs.motion && !prefs.narrow });
 initContact();
@@ -22,6 +23,7 @@ document.documentElement.dataset.pointer = prefs.fine ? 'fine' : 'coarse';
 
 if (prefs.fine && prefs.motion) {
   initTilt('[data-tilt]');
+  initCursor();
 
   const hero = document.getElementById('hero');
   hero.addEventListener(
