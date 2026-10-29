@@ -491,6 +491,57 @@ html.hero-anim .site-nav {
   font-size: 0.85rem;
 }
 
+/* Skills constellation */
+.skills-canvas {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 50vh, 520px);
+  margin-top: 2rem;
+  background: var(--raised);
+  border-radius: 16px;
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 2rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.skills-group h3 {
+  margin-bottom: 0.75rem;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.skills-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.skills-group li {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.skills-group li[data-size='2'] {
+  font-size: 0.95rem;
+}
+
+.skills-group li[data-size='3'] {
+  border-color: var(--mint);
+  color: var(--mint);
+  font-size: 1.05rem;
+}
+
 @media (min-width: 768px) {
   .timeline-item {
     display: grid;
@@ -538,6 +589,10 @@ html.hero-anim .site-nav {
 }
 
 @media (min-width: 900px) {
+  .skills-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
   .case-row {
     grid-template-columns: 3fr 2fr;
     align-items: center;
