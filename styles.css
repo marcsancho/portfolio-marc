@@ -542,6 +542,71 @@ html.hero-anim .site-nav {
   font-size: 1.05rem;
 }
 
+/* Contact */
+.contact-intro {
+  margin-top: 1rem;
+  max-width: 34rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.contact-list {
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--raised);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.contact-value {
+  overflow-wrap: anywhere;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 600;
+}
+
+.contact-row:hover .contact-value {
+  color: var(--mint);
+}
+
+.contact-status {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--mint);
+}
+
+.contact-arrow {
+  flex-shrink: 0;
+  color: var(--mint);
+  transition: transform 200ms;
+}
+
+.contact-row:hover .contact-arrow {
+  transform: translateX(6px);
+}
+
 @media (min-width: 768px) {
   .timeline-item {
     display: grid;
