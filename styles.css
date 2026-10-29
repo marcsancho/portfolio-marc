@@ -201,6 +201,11 @@ html[data-pointer='fine'] [data-tilt]:hover::after {
   opacity: 1;
 }
 
+/* The photo tilts but gets no light sweep: it already is the highlight. */
+html[data-pointer='fine'] .hero-photo::after {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* The hero-fallback safety net needs no exemption: the inline head script never adds
      html.hero-anim under reduced motion, so the hero is visible from the first paint. */
