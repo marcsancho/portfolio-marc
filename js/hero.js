@@ -1,5 +1,6 @@
 // Timing: leading indentation is typed instantly, so total ≈ typed chars * CHAR_MS + lines * LINE_MS,
-// plus the 400 ms fade. Keep it under 4 s when editing the snippet.
+// plus the 400 ms fade. Keep it under 4 s when editing the snippet. Typing is time-based, so a
+// clamped setTimeout (about 16 ms on Windows) cannot slow it down.
 const CHAR_MS = 5;
 const LINE_MS = 150;
 
@@ -67,6 +68,7 @@ export function initHero({ enabled }) {
 
   let line = 0;
   let col = 0;
+  let lineStart = 0;
   let timer = 0;
   let finished = false;
   const ac = new AbortController();
@@ -89,13 +91,17 @@ export function initHero({ enabled }) {
     const { text } = SNIPPET[line];
     col = text.length - text.trimStart().length;
     gutter.append(`${line + 1}\n`);
+    lineStart = performance.now();
     tick();
   }
 
   function tick() {
     const { text, reveals } = SNIPPET[line];
     if (col < text.length) {
-      cur.nodeValue = text.slice(0, ++col);
+      // Time-based: a clamped timer (about 16 ms on Windows) types several chars per tick.
+      const due = Math.floor((performance.now() - lineStart) / CHAR_MS);
+      col = Math.max(col + 1, Math.min(text.length, due));
+      cur.nodeValue = text.slice(0, col);
       timer = setTimeout(tick, CHAR_MS);
       return;
     }
