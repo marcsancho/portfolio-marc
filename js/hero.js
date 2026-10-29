@@ -1,7 +1,7 @@
 // Timing: leading indentation is typed instantly, so total ≈ typed chars * CHAR_MS + lines * LINE_MS,
 // plus the 400 ms fade. Keep it under 4 s when editing the snippet.
 const CHAR_MS = 5;
-const LINE_MS = 180;
+const LINE_MS = 150;
 
 const SNIPPET = [
   { text: '<section id="hero">', reveals: null },
@@ -9,10 +9,11 @@ const SNIPPET = [
   { text: '  <p class="role">', reveals: null },
   { text: '    Front-end Developer', reveals: null },
   { text: '  </p>', reveals: 'role' },
-  { text: '  <p>Angular & ExtJS specialist, AI-first.</p>', reveals: 'tagline' },
+  { text: '  <p>Enterprise front-ends, shipped with AI agents.</p>', reveals: 'tagline' },
   { text: '  <a href="#experience">See my work</a>', reveals: 'actions' },
   { text: '  <a href="#contact">Get in touch</a>', reveals: null },
   { text: '  <!-- github · linkedin · mail -->', reveals: 'social' },
+  { text: '  <img src="me.webp" alt="Marc">', reveals: 'photo' },
   { text: '</section>', reveals: null },
 ];
 

@@ -34,12 +34,19 @@
 
     <main>
       <section id="hero">
+        <canvas class="hero-canvas" aria-hidden="true"></canvas>
         <div class="container hero-grid">
           <div class="hero-content">
-            <h1 data-hero-el="name">Marc Sancho</h1>
+            <h1 data-hero-el="name">
+              <span class="ch">M</span><span class="ch">a</span><span class="ch">r</span
+              ><span class="ch">c</span> <span class="ch">S</span><span class="ch">a</span
+              ><span class="ch">n</span><span class="ch">c</span><span class="ch">h</span
+              ><span class="ch">o</span>
+            </h1>
             <p class="hero-role" data-hero-el="role">Front-end Developer</p>
             <p class="hero-tagline" data-hero-el="tagline">
-              Angular &amp; ExtJS specialist building large enterprise apps — AI-first.
+              I build large enterprise front-ends in Angular and ExtJS, and I ship them with AI
+              agents doing part of the work.
             </p>
             <div class="hero-actions" data-hero-el="actions">
               <a class="btn btn-primary" href="#experience">See my work</a>
@@ -106,7 +113,18 @@
               </li>
             </ul>
           </div>
-          <div class="hero-editor" aria-hidden="true" hidden></div>
+          <div class="hero-visual">
+            <figure class="hero-photo" data-hero-el="photo" data-tilt>
+              <img
+                src="assets/profile.webp"
+                width="640"
+                height="640"
+                alt="Marc Sancho"
+                fetchpriority="high"
+              />
+            </figure>
+            <div class="hero-editor" aria-hidden="true" hidden></div>
+          </div>
         </div>
       </section>
 
