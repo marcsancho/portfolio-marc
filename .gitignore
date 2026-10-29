@@ -4,3 +4,6 @@ node_modules/
 
 # Unblurred Casal screenshots must never be committed
 assets/casal/originals/
+
+# Cover letters stay local: the repo is public
+docs/cover-letter*.md
