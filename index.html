@@ -34,9 +34,6 @@
     <div class="cursor-ring" aria-hidden="true"></div>
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="logo" href="#hero">
-          <img src="assets/icon.png" width="32" height="32" alt="Marc Sancho" />
-        </a>
         <nav class="site-nav" aria-label="Primary">
           <a href="#hero">Home</a>
           <a href="#experience">Experience</a>
@@ -159,15 +156,10 @@
                 </p>
                 <ul>
                   <li class="card-highlight">
-                    Lead the team's shift to AI-first development: a shared agent platform that
-                    plans, implements and reviews changes across the frontend repositories, wired
-                    into Azure DevOps. Today I direct agents as much as I write code.
-                  </li>
-                  <li>
                     Build and maintain the Serviceware Knowledge frontend: Angular widgets and
-                    applications in an NX monorepo with shared libraries and reusable components.
+                    applications in an NX monorepo with shared libraries, and daily work on the
+                    product's main client, a very large ExtJS application.
                   </li>
-                  <li>Work daily on the product's main client, a very large ExtJS application.</li>
                   <li>
                     Built a Chrome and Edge browser extension in React that brings Knowledge into
                     other tools.
@@ -181,9 +173,59 @@
                     across the frontend projects.
                   </li>
                   <li>
-                    Hackathons: Serviceware's Agentic Coding Convention 2026 (17 teams building with
-                    AI agents in two days) and the Palma team hackathon.
+                    Lead the team's shift to AI-first development: a shared agent platform that
+                    plans, implements and reviews changes across the frontend repositories, wired
+                    into Azure DevOps.
                   </li>
+                  <li>
+                    Built the team's Claude Code plugin from scratch: nine agents, twenty skills,
+                    two dependency-free MCP servers (on-premises Azure DevOps, Snyk), guard hooks
+                    and evals — a ticket-to-PR workflow with human stop points.
+                  </li>
+                </ul>
+              </article>
+            </li>
+            <li class="timeline-item">
+              <time datetime="2026-01">2026 — present</time>
+              <article class="card" data-tilt data-reveal>
+                <h3>Founder &amp; developer · SaaS for Spanish SMEs</h3>
+                <p class="card-meta">Own product, in development · three-person team</p>
+                <ul>
+                  <li>
+                    Multi-tenant invoicing platform built around Spain's upcoming e-invoicing rules
+                    (VeriFactu): NestJS, Prisma and PostgreSQL with row-level tenant safety; React,
+                    Vite and Tailwind front-end; Keycloak auth; ES/EN i18n; NX monorepo.
+                  </li>
+                  <li>
+                    Infrastructure: Railway services (API, web, auth, agent runner) with per-PR
+                    environments, Docker, GitHub Actions gates for migrations, tenant safety and
+                    OpenAPI drift, and Sentry, OpenTelemetry and Grafana dashboards as code.
+                  </li>
+                  <li>
+                    Agent-operated delivery: a tool gateway with allowlists, RBAC, autonomy levels
+                    and an audit log as the only way an agent gets side effects; a git-backed board
+                    that a cron delegates to a self-hosted agent organisation (Paperclip), models
+                    picked per ticket through OpenRouter; a Jev decision model for triage.
+                  </li>
+                  <li>
+                    Own tooling: a local team desk (board, roadmap, planning, unattended runs),
+                    reviewer agents, skills and guard hooks shared by Claude Code and Copilot.
+                  </li>
+                </ul>
+              </article>
+            </li>
+            <li class="timeline-item">
+              <time datetime="2023">2023 — present</time>
+              <article class="card" data-tilt data-reveal>
+                <h3>Hackathons &amp; conferences</h3>
+                <p class="card-meta">Keeping up by building things, with and without AI</p>
+                <ul>
+                  <li>
+                    Serviceware Coding Convention every year since I started: 2023, 2024, 2025 and
+                    2026, the last one agentic — 17 teams building with AI agents in two days.
+                  </li>
+                  <li>Palma team hackathon 2025: a parking-space allocation app built in a day.</li>
+                  <li>Booking.com developer conference, Palma 2025.</li>
                 </ul>
               </article>
             </li>
@@ -228,7 +270,7 @@
             <header class="case-header" data-reveal>
               <h2>Casal de Colònies — booking management for a summer camp</h2>
               <p class="case-client">
-                Built for a camp in Colònia de Sant Pere, Mallorca · in production since 2025
+                Built for a camp in Colònia de Sant Pere, Mallorca · delivered in 2025, in use
               </p>
             </header>
 
@@ -321,7 +363,9 @@
               <code>Playwright</code>
               <code>Vitest</code>
             </p>
-            <p class="case-note">UI in Catalan, the client's language.</p>
+            <p class="case-note">
+              UI in Catalan with Spanish through i18n — the client's languages.
+            </p>
           </div>
         </div>
       </section>
@@ -379,6 +423,22 @@
                   GitHub
                 </li>
                 <li data-size="2" data-note="pipelines for widgets and apps">CI/CD</li>
+              </ul>
+            </div>
+            <div class="skills-group">
+              <h3>Backend &amp; infra</h3>
+              <ul data-group="Backend &amp; infra">
+                <li data-size="2" data-note="API of my own SaaS, with Prisma and PostgreSQL">
+                  NestJS
+                </li>
+                <li data-size="2" data-note="multi-tenant schema with row-level safety">
+                  PostgreSQL
+                </li>
+                <li data-size="2" data-note="services, per-PR environments, cron workers">
+                  Railway
+                </li>
+                <li data-size="2" data-note="local stacks and deploy images">Docker</li>
+                <li data-size="1" data-note="auth for my own SaaS">Keycloak</li>
               </ul>
             </div>
             <div class="skills-group">
