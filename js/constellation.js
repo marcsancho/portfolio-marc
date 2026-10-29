@@ -214,10 +214,19 @@ export function initConstellation(canvas, groups, { drift, detail }) {
     redraw();
   });
 
+  // has-canvas lets the CSS show the canvas (so it can be measured) and hide the HTML list;
+  // it is dropped again on narrow screens or if drawing fails, so the list never disappears for nothing.
+  const section = canvas.closest('section');
   new ResizeObserver(() => {
-    if (!canvas.clientWidth) return; // hidden on narrow screens; the HTML list shows instead
-    layout();
-    redraw();
+    section?.classList.add('has-canvas');
+    try {
+      if (!canvas.clientWidth) throw null; // narrow screen: the HTML list shows instead
+      layout();
+      redraw();
+    } catch (err) {
+      section?.classList.remove('has-canvas');
+      if (err) console.error(err);
+    }
   }).observe(canvas.parentElement);
 
   if (drift) {

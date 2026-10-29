@@ -164,10 +164,11 @@ html[data-pointer='coarse'] .cursor-ring {
     translate 0.6s;
 }
 
-/* Only hidden once the script has run, so a failed module load never leaves content invisible. */
+/* Hidden from the first paint (inline head script); the animation un-hides it if the module never reveals it. */
 html.js [data-reveal]:not(.is-visible) {
   opacity: 0;
   translate: 0 24px;
+  animation: reveal-fallback 0s 4s forwards;
 }
 
 /* Tilt (set by js/tilt.js) shares the element with reveal, so one transition lists both.
@@ -510,6 +511,13 @@ html.hero-anim .site-nav {
   }
 }
 
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
 [data-hero-el].is-pending {
   opacity: 0;
   transform: translateY(12px);
@@ -649,7 +657,7 @@ html.hero-anim .site-nav {
 }
 
 /* Skills constellation. The canvas needs room for labels, so under 700px the HTML list shows
-   instead; with JS on wider screens the list is kept for assistive tech only. */
+   instead; once the canvas has drawn (#skills.has-canvas) the list is kept for assistive tech only. */
 .skills-canvas {
   display: none;
   width: 100%;
@@ -682,12 +690,12 @@ html.hero-anim .site-nav {
 }
 
 @media (min-width: 700px) {
-  html.js .skills-canvas,
-  html.js .skills-detail {
+  #skills.has-canvas .skills-canvas,
+  #skills.has-canvas .skills-detail {
     display: block;
   }
 
-  html.js .skills-list {
+  #skills.has-canvas .skills-list {
     position: absolute;
     width: 1px;
     height: 1px;
