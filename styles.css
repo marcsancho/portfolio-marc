@@ -202,10 +202,52 @@ html[data-pointer='fine'] [data-tilt]:hover::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* Same specificity as the tilt rule above (which also sets transition), and later. */
-  html[data-pointer] [data-reveal] {
-    transition: none;
+  /* The hero-fallback safety net needs no exemption: the inline head script never adds
+     html.hero-anim under reduced motion, so the hero is visible from the first paint. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
   }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Same specificity as the hidden-until-revealed and tilt rules above, and later. */
+  html.js [data-reveal]:not(.is-visible) {
+    opacity: 1;
+    translate: none;
+  }
+
+  html[data-pointer] .ch:hover {
+    translate: none;
+    rotate: none;
+  }
+
+  .contact-row:hover .contact-arrow {
+    transform: none;
+  }
+
+  .cursor-ring {
+    display: none;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  color: var(--mint);
+  transform: translateY(-100%);
+}
+
+.skip-link:focus {
+  transform: none;
 }
 
 .site-footer {
