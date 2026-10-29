@@ -238,7 +238,111 @@ h2 {
 }
 
 .hero-editor {
+  display: flex;
+  flex-direction: column;
   min-height: 20rem;
+  background: var(--surface);
+  border: 1px solid var(--raised);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow: hidden;
+  transition: opacity 400ms;
+}
+
+.hero-editor[hidden] {
+  display: none;
+}
+
+.hero-editor.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-editor__bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--raised);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.hero-editor__body {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.hero-editor__gutter {
+  color: var(--text-muted);
+  text-align: right;
+  white-space: pre;
+  user-select: none;
+}
+
+.hero-editor pre {
+  min-width: 0;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.hero-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--mint);
+  vertical-align: text-bottom;
+  animation: hero-blink 1s steps(1) infinite;
+}
+
+@keyframes hero-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.tok-tag {
+  color: var(--mint);
+}
+
+.tok-attr {
+  color: var(--teal-light);
+}
+
+.tok-str {
+  color: var(--mint-light);
+}
+
+.tok-comment {
+  color: var(--text-muted);
+}
+
+.tok-text {
+  color: var(--text);
+}
+
+[data-hero-el] {
+  transition:
+    opacity 500ms,
+    transform 500ms;
+}
+
+[data-hero-el].is-pending {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.site-nav {
+  transition: opacity 400ms;
+}
+
+.site-nav.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {

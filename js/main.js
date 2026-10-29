@@ -1,4 +1,7 @@
 import { prefs } from './prefs.js';
+import { initHero } from './hero.js';
+
+initHero({ enabled: prefs.motion && !prefs.narrow });
 
 document.documentElement.dataset.pointer = prefs.fine ? 'fine' : 'coarse';
 
