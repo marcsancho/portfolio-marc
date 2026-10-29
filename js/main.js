@@ -2,9 +2,11 @@ import { prefs } from './prefs.js';
 import { initHero } from './hero.js';
 import { initConstellation } from './constellation.js';
 import { initContact } from './contact.js';
+import { initReveal } from './reveal.js';
 
 initHero({ enabled: prefs.motion && !prefs.narrow });
 initContact();
+initReveal({ instant: !prefs.motion });
 
 const groups = [...document.querySelectorAll('ul[data-group]')].map((ul) => ({
   name: ul.dataset.group,

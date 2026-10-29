@@ -14,6 +14,7 @@
     <script type="module" src="js/main.js"></script>
   </head>
   <body>
+    <div class="progress" aria-hidden="true"></div>
     <header class="site-header">
       <div class="container site-header__inner">
         <a class="logo" href="#hero">
@@ -109,7 +110,7 @@
 
       <section id="experience">
         <div class="container">
-          <h2>Experience</h2>
+          <h2 data-reveal>Experience</h2>
           <ol class="timeline">
             <li class="timeline-item">
               <time datetime="2023-03">2023 — present</time>
@@ -175,7 +176,7 @@
       <section id="project">
         <div class="container">
           <div class="case-study">
-            <header class="case-header">
+            <header class="case-header" data-reveal>
               <h2>Casal de Colònies — booking management for a summer camp</h2>
               <p class="case-client">
                 Built for a camp in Colònia de Sant Pere, Mallorca. In production.
@@ -274,8 +275,8 @@
 
       <section id="skills">
         <div class="container">
-          <h2>Skills</h2>
-          <canvas class="skills-canvas" aria-hidden="true"></canvas>
+          <h2 data-reveal>Skills</h2>
+          <canvas class="skills-canvas" aria-hidden="true" data-reveal></canvas>
           <div class="skills-list">
             <div class="skills-group">
               <h3>Frameworks</h3>
@@ -331,7 +332,7 @@
 
       <section id="contact">
         <div class="container">
-          <h2>Contact</h2>
+          <h2 data-reveal>Contact</h2>
           <p class="contact-intro">
             Open to frontend roles and interesting problems. Based in Palma de Mallorca, happy with
             remote.
