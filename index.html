@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marc Sancho — Front-end Developer</title>
+    <meta
+      name="description"
+      content="Marc Sancho, Front-end Developer in Palma de Mallorca. Angular and ExtJS specialist building large enterprise apps, AI-first."
+    />
+    <meta name="theme-color" content="#121212" />
+    <meta property="og:title" content="Marc Sancho — Front-end Developer" />
+    <meta
+      property="og:description"
+      content="Marc Sancho, Front-end Developer in Palma de Mallorca. Angular and ExtJS specialist building large enterprise apps, AI-first."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://marcsancho.github.io/portfolio-marc/" />
+    <meta property="og:image" content="https://marcsancho.github.io/portfolio-marc/assets/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Inline on purpose: it must run before first paint, which a deferred module cannot do.
+      document.documentElement.classList.add('js');
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && innerWidth >= 768)
+        document.documentElement.classList.add('hero-anim');
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#experience">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="logo" href="#hero">
+          <img src="assets/icon.png" width="32" height="32" alt="Marc Sancho" />
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#hero">Home</a>
+          <a href="#experience">Experience</a>
+          <a href="#project">Project</a>
+          <a href="#skills">Skills</a>
+          <a href="#ai">AI</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero">
+        <canvas class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <h1 data-hero-el="name">
+              <span class="ch">M</span><span class="ch">a</span><span class="ch">r</span
+              ><span class="ch">c</span> <span class="ch">S</span><span class="ch">a</span
+              ><span class="ch">n</span><span class="ch">c</span><span class="ch">h</span
+              ><span class="ch">o</span>
+            </h1>
+            <p class="hero-role" data-hero-el="role">Front-end Developer</p>
+            <p class="hero-tagline" data-hero-el="tagline">
+              I build large enterprise front-ends in Angular and ExtJS, and I ship them with AI
+              agents doing part of the work.
+            </p>
+            <div class="hero-actions" data-hero-el="actions">
+              <a class="btn btn-primary" href="#experience">See my work</a>
+              <a class="btn btn-ghost" href="#contact">Get in touch</a>
+            </div>
+            <ul class="hero-social" data-hero-el="social">
+              <li>
+                <a
+                  href="https://github.com/marcsancho"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="GitHub"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/marcsanchosantandreu/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="LinkedIn"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:marcsancho22@gmail.com" aria-label="Email">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-10 6L2 7" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="hero-visual">
+            <figure class="hero-photo" data-hero-el="photo" data-tilt="9">
+              <img
+                src="assets/profile.webp"
+                width="640"
+                height="640"
+                alt="Marc Sancho"
+                fetchpriority="high"
+              />
+            </figure>
+            <div class="hero-editor" aria-hidden="true" hidden></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="container">
+          <h2 data-reveal>Experience</h2>
+          <ol class="timeline">
+            <li class="timeline-item">
+              <time datetime="2023-03">2023 — present</time>
+              <article class="card" data-tilt data-reveal>
+                <h3>Front-end Developer · Serviceware</h3>
+                <p class="card-meta">
+                  Serviceware Knowledge team · Palma de Mallorca, hybrid · internship from March
+                  2023, full-time since June 2023
+                </p>
+                <ul>
+                  <li class="card-highlight">
+                    Lead the team's shift to AI-first development: a shared agent platform that
+                    plans, implements and reviews changes across the frontend repositories, wired
+                    into Azure DevOps. Today I direct agents as much as I write code.
+                  </li>
+                  <li>
+                    Build and maintain the Serviceware Knowledge frontend: Angular widgets and
+                    applications in an NX monorepo with shared libraries and reusable components.
+                  </li>
+                  <li>Work daily on the product's main client, a very large ExtJS application.</li>
+                  <li>
+                    Built a Chrome and Edge browser extension in React that brings Knowledge into
+                    other tools.
+                  </li>
+                  <li>
+                    Own the Azure DevOps side: repositories, branching, CI/CD pipelines and package
+                    flows, including migrations from Jenkins, Jira and GitHub.
+                  </li>
+                  <li>
+                    Automated tests with Playwright and Jest; code review and JSDoc documentation
+                    across the frontend projects.
+                  </li>
+                  <li>
+                    Hackathons: Serviceware's Agentic Coding Convention 2026 (17 teams building with
+                    AI agents in two days) and the Palma team hackathon.
+                  </li>
+                </ul>
+              </article>
+            </li>
+            <li class="timeline-item">
+              <time datetime="2025-02">2025</time>
+              <article class="card" data-tilt data-reveal>
+                <h3>Google: Artificial Intelligence and Productivity · Santander Open Academy</h3>
+                <p class="card-meta">Certificate</p>
+              </article>
+            </li>
+            <li class="timeline-item">
+              <time datetime="2021-09">2021 — 2023</time>
+              <article class="card" data-tilt data-reveal>
+                <h3>Web Development · CIFP Francesc de Borja Moll</h3>
+                <p class="card-meta">Higher Vocational Diploma</p>
+                <ul>
+                  <li>
+                    JavaScript, HTML, CSS and SQL; first full-stack apps with PHP/Laravel and Java.
+                  </li>
+                </ul>
+              </article>
+            </li>
+            <li class="timeline-item">
+              <time datetime="2019-09">2019 — 2021</time>
+              <article class="card" data-tilt data-reveal>
+                <h3>Network &amp; Systems Administration · IES Capdepera</h3>
+                <p class="card-meta">Intermediate Vocational Diploma</p>
+                <ul>
+                  <li>
+                    Linux and Windows servers, DNS, mail, SSH, MySQL; Erasmus placement in Cork.
+                  </li>
+                </ul>
+              </article>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="project">
+        <div class="container">
+          <div class="case-study">
+            <header class="case-header" data-reveal>
+              <h2>Casal de Colònies — booking management for a summer camp</h2>
+              <p class="case-client">
+                Built for a camp in Colònia de Sant Pere, Mallorca · in production since 2025
+              </p>
+            </header>
+
+            <div class="case-row">
+              <figure class="screen" data-tilt data-reveal>
+                <img
+                  src="assets/casal/casal-inici.webp"
+                  width="1440"
+                  height="800"
+                  loading="lazy"
+                  alt="Dashboard with a first-run checklist, season KPIs, upcoming arrivals and an occupancy calendar"
+                />
+                <figcaption>
+                  The dashboard: checklist, season KPIs and occupancy calendar.
+                </figcaption>
+              </figure>
+              <div class="case-text">
+                <h3>The problem</h3>
+                <p>
+                  A small camp managed its school group bookings for each season by hand.
+                  Agreements, annexes, deadlines and occupancy were spread over documents and email.
+                </p>
+                <h3>The solution</h3>
+                <p>
+                  A portable desktop app that runs from a USB stick on any Windows machine, with no
+                  server and no installation. It manages schools and bookings and tracks the status
+                  of each booking: agreement sent, waiting for Annex 1, confirmed. It generates the
+                  booking agreement and Annex 1 as PDFs and emails them through the client's Gmail
+                  account, shows an occupancy calendar and upcoming deadlines, and includes a
+                  first-run checklist and a built-in manual.
+                </p>
+              </div>
+            </div>
+
+            <div class="case-row">
+              <figure class="screen" data-tilt data-reveal>
+                <img
+                  src="assets/casal/casal-reserva.webp"
+                  width="1440"
+                  height="778"
+                  loading="lazy"
+                  alt="Booking form with the school, status, stay dates, reserved places, prices and the meals included in full board"
+                />
+                <figcaption>The booking form.</figcaption>
+              </figure>
+              <div class="case-text">
+                <h3>The technical challenge</h3>
+                <p>
+                  The app had to be portable and work offline. Electron packages a Next.js app, and
+                  the data lives in a local SQLite database through sql.js. Authentication is dual:
+                  Google sign-in when online and “continue offline” when not. Google OAuth had to
+                  work from a desktop app, and a documented migration path covers legacy data.
+                </p>
+              </div>
+            </div>
+
+            <div class="case-row">
+              <figure class="screen" data-tilt data-reveal>
+                <img
+                  src="assets/casal/casal-acord.webp"
+                  width="1440"
+                  height="771"
+                  loading="lazy"
+                  alt="Preview of the generated booking agreement PDF, with options to download, print or send it by email"
+                />
+                <figcaption>
+                  A generated booking agreement, ready to download, print or send.
+                </figcaption>
+              </figure>
+              <div class="case-text">
+                <h3>PDFs the client controls</h3>
+                <p>
+                  The documents are the heart of the app, and the camp owns them. It uploads its own
+                  PDF templates, maps each field to booking data, and can create new fields or edit
+                  the PDF itself whenever a contract changes. The app validates that every required
+                  field is present before it generates a document, so nothing goes out half-filled.
+                </p>
+                <h3>Delivered end to end</h3>
+                <p>Requirements, delivery and support for a real client, not a demo.</p>
+              </div>
+            </div>
+
+            <p class="case-stack">
+              <code>Next.js</code>
+              <code>TypeScript</code>
+              <code>Electron</code>
+              <code>Tailwind CSS</code>
+              <code>sql.js (SQLite)</code>
+              <code>Gmail API</code>
+              <code>Playwright</code>
+              <code>Vitest</code>
+            </p>
+            <p class="case-note">UI in Catalan, the client's language.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <h2 data-reveal>Skills</h2>
+          <p class="section-intro" data-reveal>
+            Five clusters, one hub each. Node size is depth of experience; hover a node for where I
+            have used it.
+          </p>
+          <canvas class="skills-canvas" aria-hidden="true" data-reveal></canvas>
+          <p class="skills-detail" aria-live="polite">
+            Hover a node — size means depth of experience.
+          </p>
+          <div class="skills-list">
+            <div class="skills-group">
+              <h3>Frameworks</h3>
+              <ul data-group="Frameworks">
+                <li data-size="3" data-note="daily since 2023: Knowledge widgets and apps">
+                  Angular
+                </li>
+                <li data-size="3" data-note="the product's main client, a very large codebase">
+                  ExtJS
+                </li>
+                <li data-size="2" data-note="the Chrome/Edge extension and side projects">React</li>
+                <li data-size="2" data-note="Casal de Colònies, packaged with Electron">Next.js</li>
+                <li data-size="2" data-note="Casal de Colònies: portable, offline desktop build">
+                  Electron
+                </li>
+                <li data-size="1" data-note="student project">Vue</li>
+              </ul>
+            </div>
+            <div class="skills-group">
+              <h3>Languages</h3>
+              <ul data-group="Languages">
+                <li data-size="3" data-note="everything since 2023 is typed">TypeScript</li>
+                <li data-size="3" data-note="this site is hand-written JS modules">JavaScript</li>
+                <li data-size="3" data-note="semantic, accessible markup">HTML5</li>
+                <li data-size="3" data-note="this site is hand-written CSS, no framework">CSS3</li>
+                <li data-size="2" data-note="Angular and ExtJS theming">SCSS</li>
+              </ul>
+            </div>
+            <div class="skills-group">
+              <h3>Tooling</h3>
+              <ul data-group="Tooling">
+                <li data-size="3" data-note="shared libraries, package flows, affected builds">
+                  NX monorepo
+                </li>
+                <li data-size="3" data-note="branching, history hygiene, migrations">Git</li>
+                <li data-size="3" data-note="repos, pipelines, migrations from Jenkins/Jira/GitHub">
+                  Azure DevOps
+                </li>
+                <li data-size="2" data-note="personal projects and repository migrations">
+                  GitHub
+                </li>
+                <li data-size="2" data-note="pipelines for widgets and apps">CI/CD</li>
+              </ul>
+            </div>
+            <div class="skills-group">
+              <h3>Testing</h3>
+              <ul data-group="Testing">
+                <li data-size="2" data-note="end-to-end for widgets and for Casal">Playwright</li>
+                <li data-size="2" data-note="unit tests in Angular">Jest</li>
+                <li data-size="1" data-note="Casal de Colònies">Vitest</li>
+              </ul>
+            </div>
+            <div class="skills-group">
+              <h3>AI</h3>
+              <ul data-group="AI">
+                <li data-size="3" data-note="directing agents on real tickets, every day">
+                  AI agents
+                </li>
+                <li
+                  data-size="3"
+                  data-note="role commands in the team's meta-repo, MCP to Azure DevOps"
+                >
+                  Agent harness
+                </li>
+                <li data-size="2" data-note="main driver of the harness">Claude Code</li>
+                <li
+                  data-size="2"
+                  data-note="Azure DevOps, security scanning and repo access for agents"
+                >
+                  MCP
+                </li>
+                <li data-size="2" data-note="the behaviour store every repository follows">
+                  OpenSpec
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ai">
+        <div class="container">
+          <h2 data-reveal>Working with AI</h2>
+          <p class="section-intro" data-reveal>
+            Over the last two years most of my learning has gone into one question: how does a real
+            team ship with AI agents without losing control? This is the path so far.
+          </p>
+
+          <ol class="ai-path">
+            <li class="card ai-step" data-tilt data-reveal>
+              <span class="ai-step__n">01</span>
+              <h3>Assistants in the editor</h3>
+              <p>
+                Autocomplete and chat first. Great for boilerplate and tests, unreliable on a very
+                large ExtJS codebase it knew nothing about. First lesson: the model is only as good
+                as the context it gets.
+              </p>
+            </li>
+            <li class="card ai-step" data-tilt data-reveal>
+              <span class="ai-step__n">02</span>
+              <h3>Agents, models, side by side</h3>
+              <p>
+                Ran the same tickets through Codex, Claude Code and OpenCode, and routed many models
+                through OpenRouter to compare cost and quality. Added Jev, a non-LLM decision model,
+                for routing and classification where a chatbot is the wrong tool.
+              </p>
+            </li>
+            <li class="card ai-step" data-tilt data-reveal>
+              <span class="ai-step__n">03</span>
+              <h3>A harness for the whole team</h3>
+              <p>
+                Another team started a company meta-repo; the Knowledge team adopted it and I drive
+                most of what it became for us: role commands (<code>/support-</code>,
+                <code>/po-</code>, <code>/dev-</code>) that Claude Code runs, Azure DevOps and the
+                repos reached through MCP, and OpenSpec as the single store of behaviour — over a
+                hundred requirements that every repository follows.
+              </p>
+            </li>
+          </ol>
+
+          <div class="ai-lessons" data-reveal>
+            <h3>What I've learned</h3>
+            <ul>
+              <li>
+                <strong>Context beats model.</strong> The same model is useless or excellent
+                depending on what it is handed: specs, conventions, a map of the repos.
+              </li>
+              <li>
+                <strong>Reads are free, writes ask.</strong> Every command may read anything; every
+                write shows a numbered list and waits for a yes. Nobody fears the tool, and
+                everything it touches is marked ai-assisted.
+              </li>
+              <li>
+                <strong>Not every call needs an LLM.</strong> Routing and classification run faster
+                and cheaper on a decision model; generation is for text.
+              </li>
+              <li>
+                <strong>Measure on real tickets.</strong> One command, one real ticket per sprint,
+                and a feedback file in the repo. Demos prove nothing.
+              </li>
+            </ul>
+          </div>
+
+          <p class="chips" data-reveal>
+            <code>Claude Code</code>
+            <code>Codex</code>
+            <code>OpenCode</code>
+            <code>OpenRouter</code>
+            <code>Jev</code>
+            <code>MCP</code>
+            <code>OpenSpec</code>
+            <code>Claude Desktop</code>
+          </p>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <h2 data-reveal>Contact</h2>
+          <p class="contact-intro">
+            Open to frontend roles and interesting problems. Based in Palma de Mallorca, happy with
+            remote.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <a
+                class="contact-row"
+                href="mailto:marcsancho22@gmail.com"
+                data-copy="marcsancho22@gmail.com"
+              >
+                <span class="contact-main">
+                  <span class="contact-label">Email</span>
+                  <span class="contact-value">marcsancho22@gmail.com</span>
+                </span>
+                <span class="contact-status" aria-live="polite"></span>
+                <svg
+                  class="contact-arrow"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="contact-row"
+                href="https://www.linkedin.com/in/marcsanchosantandreu/"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="contact-main">
+                  <span class="contact-label">LinkedIn</span>
+                  <span class="contact-value">/in/marcsanchosantandreu</span>
+                </span>
+                <svg
+                  class="contact-arrow"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="contact-row"
+                href="https://github.com/marcsancho"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="contact-main">
+                  <span class="contact-label">GitHub</span>
+                  <span class="contact-value">github.com/marcsancho</span>
+                </span>
+                <svg
+                  class="contact-arrow"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Built by hand with HTML, CSS and JavaScript.
+          <a href="https://github.com/marcsancho/portfolio-marc">Source on GitHub</a>. &copy;
+          <span id="year">2026</span>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

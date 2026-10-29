@@ -1,0 +1,1036 @@
+:root {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --raised: #2d2d2d;
+  --mint: #9bd9b2;
+  --mint-light: #c1f5d9;
+  --mint-dark: #75ad8c;
+  --teal: #4a858b;
+  --teal-light: #71b2b7;
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+  --max-w: 72rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--mint);
+}
+
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+section {
+  padding-block: clamp(4rem, 10vh, 8rem);
+}
+
+h1,
+h2 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding-block: 0.75rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.site-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current='true'] {
+  color: var(--mint);
+}
+
+.site-nav a[aria-current='true'] {
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+}
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--mint);
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+  z-index: 100;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--mint);
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 101;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 150ms,
+    opacity 150ms;
+}
+
+.cursor-ring.is-visible {
+  opacity: 1;
+}
+
+.cursor-ring.is-active {
+  transform: translate(-50%, -50%) scale(1.8);
+}
+
+html[data-pointer='coarse'] .cursor-ring {
+  display: none;
+}
+
+/* `translate` (not `transform`) so reveal composes with the tilt transform on cards. */
+[data-reveal] {
+  transition:
+    opacity 0.6s,
+    translate 0.6s;
+}
+
+/* Hidden from the first paint (inline head script). */
+html.js [data-reveal]:not(.is-visible) {
+  opacity: 0;
+  translate: 0 24px;
+}
+
+/* Safety net for a reveal module that never ran; once it has (reveal-ready) it alone decides. */
+html.js:not(.reveal-ready) [data-reveal]:not(.is-visible) {
+  animation: reveal-fallback 0s 4s forwards;
+}
+
+/* Tilt (set by js/tilt.js) shares the element with reveal, so one transition lists both.
+   Scoped to fine pointers: coarse devices never tilt, so they get no stacking contexts. */
+html[data-pointer='fine'] [data-tilt] {
+  position: relative;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    transform 0.15s ease-out,
+    opacity 0.6s,
+    translate 0.6s;
+  will-change: transform;
+}
+
+html[data-pointer='fine'] [data-tilt]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    color-mix(in srgb, var(--text) 8%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+
+html[data-pointer='fine'] [data-tilt]:hover::after {
+  opacity: 1;
+}
+
+/* The photo tilts but gets no light sweep: it already is the highlight. */
+html[data-pointer='fine'] .hero-photo::after {
+  display: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  color: var(--mint);
+  transform: translateY(-100%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.site-footer {
+  padding-block: 2rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Hero */
+#hero {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100svh - 3.5rem);
+  isolation: isolate;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at var(--mx) var(--my), rgba(155, 217, 178, 0.16), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    48px 48px,
+    48px 48px;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/* Once the script runs, the canvas grid (js/hero-grid.js) replaces the static CSS grid. */
+html[data-pointer] #hero::before {
+  display: none;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+.hero-content {
+  text-align: left;
+}
+
+.hero-content h1 {
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* The gradient is clipped per letter: a moving letter gets its own compositing layer, where a
+   clip set on the parent would no longer reach and the letter would vanish. */
+.ch {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--mint), var(--teal-light));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition:
+    translate 0.25s,
+    rotate 0.25s;
+}
+
+html[data-pointer='fine'] .ch:hover {
+  translate: 0 -0.12em;
+  rotate: -4deg;
+}
+
+.hero-role {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--mint);
+}
+
+.hero-tagline {
+  margin-top: 1rem;
+  max-width: 34rem;
+  font-size: 1.125rem;
+  color: var(--text-muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding-inline: 1.5rem;
+  border: 2px solid var(--mint);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.btn-primary {
+  background: var(--mint);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: var(--mint-light);
+  border-color: var(--mint-light);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--mint);
+}
+
+.btn-ghost:hover {
+  background: color-mix(in srgb, var(--mint) 12%, transparent);
+}
+
+.hero-social {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-social a {
+  display: block;
+  color: var(--text-muted);
+}
+
+.hero-social a:hover {
+  color: var(--mint);
+}
+
+.hero-social svg {
+  display: block;
+}
+
+/* Photo and editor share one grid cell: the editor types on top, then fades to reveal the photo. */
+.hero-visual {
+  display: grid;
+  width: 100%;
+}
+
+.hero-visual > * {
+  grid-area: 1 / 1;
+}
+
+.hero-photo {
+  width: min(22rem, 100%);
+  justify-self: center;
+  aspect-ratio: 1;
+  border: 1px solid var(--raised);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, var(--mint) 25%, transparent);
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-editor {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  min-height: 20rem;
+  background: var(--surface);
+  border: 1px solid var(--raised);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow: hidden;
+  transition: opacity 400ms;
+}
+
+.hero-editor[hidden] {
+  display: none;
+}
+
+.hero-editor.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-editor__bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--raised);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.hero-editor__body {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.hero-editor__gutter {
+  color: var(--text-muted);
+  text-align: right;
+  white-space: pre;
+  user-select: none;
+}
+
+.hero-editor pre {
+  min-width: 0;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.hero-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--mint);
+  vertical-align: text-bottom;
+  animation: hero-blink 1s steps(1) infinite;
+}
+
+@keyframes hero-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.tok-tag {
+  color: var(--mint);
+}
+
+.tok-attr {
+  color: var(--teal-light);
+}
+
+.tok-str {
+  color: var(--mint-light);
+}
+
+.tok-comment {
+  color: var(--text-muted);
+}
+
+.tok-text {
+  color: var(--text);
+}
+
+[data-hero-el] {
+  transition:
+    opacity 500ms,
+    transform 500ms;
+}
+
+/* Hides the hero and nav before the module runs; the animation un-hides it if the module never loads. */
+html.hero-anim [data-hero-el],
+html.hero-anim .site-nav {
+  opacity: 0;
+  animation: hero-fallback 0s 5s forwards;
+}
+
+@keyframes hero-fallback {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+[data-hero-el].is-pending {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.site-nav {
+  transition: opacity 400ms;
+}
+
+.site-nav.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Experience timeline */
+.timeline {
+  --date-col: 8rem;
+  --gap: 2rem;
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.timeline-item time {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--mint);
+}
+
+.card {
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transform-style: preserve-3d;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.card-meta {
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--teal-light);
+}
+
+.card ul {
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.card li + li {
+  margin-top: 0.5rem;
+}
+
+.card-highlight {
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid var(--mint);
+  background: color-mix(in srgb, var(--mint) 8%, transparent);
+  color: var(--text);
+  list-style: none;
+  margin-left: -1.25rem;
+}
+
+/* Casal de Colònies case study */
+.case-client {
+  margin-top: 0.75rem;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.case-row {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.screen {
+  background: var(--raised);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, black 60%, transparent);
+  overflow: hidden;
+}
+
+.screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screen figcaption {
+  padding: 0.5rem 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.case-text h3 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--mint);
+}
+
+.case-text p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}
+
+.case-text h3:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.case-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 3rem;
+}
+
+.case-note {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Skills constellation. The canvas needs room for labels, so under 700px the HTML list shows
+   instead; once the canvas has drawn (#skills.has-canvas) the list is kept for assistive tech only. */
+.skills-canvas {
+  display: none;
+  width: 100%;
+  margin-top: 2rem;
+  background:
+    radial-gradient(
+      ellipse at 50% 40%,
+      color-mix(in srgb, var(--teal) 14%, transparent),
+      transparent 70%
+    ),
+    var(--surface);
+  border: 1px solid var(--raised);
+  border-radius: 16px;
+}
+
+.skills-detail {
+  display: none;
+  min-height: 1.5rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--teal-light);
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 2rem 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 700px) {
+  #skills.has-canvas .skills-canvas,
+  #skills.has-canvas .skills-detail {
+    display: block;
+  }
+
+  #skills.has-canvas .skills-list {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.skills-group h3 {
+  margin-bottom: 0.75rem;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.skills-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.skills-group li {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.skills-group li[data-size='2'] {
+  font-size: 0.95rem;
+}
+
+.skills-group li[data-size='3'] {
+  border-color: var(--mint);
+  color: var(--mint);
+  font-size: 1.05rem;
+}
+
+/* Working with AI */
+.section-intro {
+  margin-top: 1rem;
+  max-width: 38rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.ai-path {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.ai-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ai-step__n {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--teal-light);
+}
+
+.ai-step h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.ai-step p {
+  color: var(--text-muted);
+}
+
+.ai-step code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--mint);
+}
+
+.ai-lessons {
+  margin-top: 3rem;
+}
+
+.ai-lessons h3 {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--teal-light);
+}
+
+.ai-lessons ul {
+  display: grid;
+  gap: 1rem 2rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-lessons li {
+  padding-left: 1rem;
+  border-left: 3px solid var(--mint);
+  color: var(--text-muted);
+}
+
+.ai-lessons strong {
+  color: var(--text);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.chips code,
+.case-stack code {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* Contact */
+.contact-intro {
+  margin-top: 1rem;
+  max-width: 34rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.contact-list {
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--raised);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.contact-value {
+  overflow-wrap: anywhere;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 600;
+}
+
+.contact-row:hover .contact-value {
+  color: var(--mint);
+}
+
+.contact-status {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--mint);
+}
+
+.contact-arrow {
+  flex-shrink: 0;
+  color: var(--mint);
+  transition: transform 200ms;
+}
+
+.contact-row:hover .contact-arrow {
+  transform: translateX(6px);
+}
+
+/* Narrow screens: the photo comes first and small, the editor never renders. */
+@media (max-width: 767px) {
+  .hero-visual {
+    order: -1;
+    width: 9rem;
+  }
+
+  /* One-row header: the logo already goes home, so the Home link goes. */
+  .site-nav a[href='#hero'] {
+    display: none;
+  }
+
+  .site-header__inner {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+  }
+
+  .site-nav {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    font-size: 0.7rem;
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline-item {
+    display: grid;
+    grid-template-columns: var(--date-col) 1fr;
+    column-gap: var(--gap);
+  }
+
+  .timeline-item time {
+    margin: 0;
+    padding-top: 0.2rem;
+  }
+
+  /* Line and dot sit in the middle of the gap between date and card. */
+  .timeline-item::before,
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--date-col) + var(--gap) / 2);
+  }
+
+  .timeline-item::before {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--teal);
+  }
+
+  .timeline-item::after {
+    top: 0.45rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-left: -0.375rem;
+    border-radius: 50%;
+    background: var(--mint);
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .hero-visual {
+    justify-self: center;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 900px) {
+  .skills-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .ai-path {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ai-lessons ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .case-row {
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .case-row:nth-of-type(even) {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .case-row:nth-of-type(even) .screen {
+    order: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The hero-fallback safety net needs no exemption: the inline head script never adds
+     html.hero-anim under reduced motion, so the hero is visible from the first paint. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Keep this block last in the file: it overrides rules of equal specificity by coming after them. */
+  html.js [data-reveal]:not(.is-visible) {
+    opacity: 1;
+    translate: none;
+  }
+
+  html[data-pointer] .ch:hover {
+    translate: none;
+    rotate: none;
+  }
+
+  .contact-row:hover .contact-arrow {
+    transform: none;
+  }
+
+  .cursor-ring {
+    display: none;
+  }
+}

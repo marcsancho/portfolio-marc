@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Marc Sancho — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The one-page portfolio of Marc Sancho, Front-end Developer in Palma de Mallorca.
+Written by hand in HTML, CSS and ES modules: no framework, no bundler, no build step.
+All content is in the HTML and readable without JavaScript; the effects are an enhancement on top.
 
-## Available Scripts
+Live site: https://marcsancho.github.io/portfolio-marc/
 
-In the project directory, you can run:
+## Sections
 
-### `npm start`
+Hero, experience timeline, Casal de Colònies case study, skills, "Working with AI", contact.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Running it
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+npm install   # installs Prettier, the only dev dependency
+npm start     # python -m http.server on http://localhost:8080
+```
 
-### `npm test`
+Opening `index.html` directly shows the content, but browsers such as Chrome block ES modules
+on `file://`, so the effects need the local server.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Effects
 
-### `npm run build`
+- **Hero:** a code editor writes its own snippet, then fades into the photo.
+- **Hero grid:** a canvas grid whose lines bend away from the pointer and light up around it.
+- **Skills:** a canvas of labelled clusters; hovering a node shows its note.
+- **Reveal:** reading progress bar, scroll reveal and nav highlight.
+- **Cards:** subtle 3D tilt.
+- **Cursor:** a ring that follows the pointer.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The effects run only on fine pointers (`(pointer: fine)`) and only when
+`prefers-reduced-motion` is not set. The hero animation also needs a viewport of 768 px or wider.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+index.html          all content and markup
+styles.css          all styles
+js/main.js          entry point: feature-detects prefs, then starts each effect
+js/prefs.js         pointer type and motion preference
+js/hero.js          self-writing code editor
+js/hero-grid.js     canvas grid behind the hero
+js/constellation.js skills canvas
+js/reveal.js        progress bar, scroll reveal, nav highlight
+js/tilt.js          3D tilt on cards
+js/cursor.js        cursor ring
+js/contact.js       copy-to-clipboard contact links (mailto fallback), footer year
+assets/             photo, favicon, Open Graph image, Casal screenshots (WebP)
+docs/superpowers/   design spec and implementation plan
+```
 
-### `npm run eject`
+## Accessibility
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Content does not depend on JavaScript or animation.
+- Effects are gated on `(pointer: fine)` and `prefers-reduced-motion`.
+- Skip link to the main content.
+- Visible keyboard focus styles.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Formatting
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sh
+npm run check-format   # Prettier check
+npm run format         # Prettier write
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deployment
 
-## Learn More
+GitHub Pages serves the `main` branch root. Each push to `main` publishes the site.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Licence
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Content © Marc Sancho. Code is free to reuse; the content, photos and screenshots are not.
