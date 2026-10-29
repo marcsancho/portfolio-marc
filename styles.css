@@ -900,6 +900,23 @@ html.hero-anim .site-nav {
     order: -1;
     width: 9rem;
   }
+
+  /* One-row header: the logo already goes home, so the Home link goes. */
+  .site-nav a[href='#hero'] {
+    display: none;
+  }
+
+  .site-header__inner {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+  }
+
+  .site-nav {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    font-size: 0.7rem;
+    overflow-x: auto;
+  }
 }
 
 @media (min-width: 768px) {
