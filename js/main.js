@@ -1,5 +1,3 @@
-document.documentElement.classList.add('js'); // reveal hiding is scoped to this class
-
 import { prefs } from './prefs.js';
 import { initHero } from './hero.js';
 import { initConstellation } from './constellation.js';

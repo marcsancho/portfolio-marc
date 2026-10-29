@@ -170,8 +170,9 @@ html.js [data-reveal]:not(.is-visible) {
   translate: 0 24px;
 }
 
-/* Tilt (set by js/tilt.js) shares the element with reveal, so one transition lists both. */
-[data-tilt] {
+/* Tilt (set by js/tilt.js) shares the element with reveal, so one transition lists both.
+   Scoped to fine pointers: coarse devices never tilt, so they get no stacking contexts. */
+html[data-pointer='fine'] [data-tilt] {
   position: relative;
   transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition:
@@ -181,7 +182,7 @@ html.js [data-reveal]:not(.is-visible) {
   will-change: transform;
 }
 
-[data-tilt]::after {
+html[data-pointer='fine'] [data-tilt]::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -196,12 +197,13 @@ html.js [data-reveal]:not(.is-visible) {
   pointer-events: none;
 }
 
-[data-tilt]:hover::after {
+html[data-pointer='fine'] [data-tilt]:hover::after {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
+  /* Same specificity as the tilt rule above (which also sets transition), and later. */
+  html[data-pointer] [data-reveal] {
     transition: none;
   }
 }
@@ -530,7 +532,6 @@ html.hero-anim .site-nav {
 }
 
 .screen {
-  transform-style: preserve-3d;
   background: var(--raised);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;

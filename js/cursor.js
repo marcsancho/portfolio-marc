@@ -1,4 +1,5 @@
 const LERP = 0.18;
+const SETTLE = 0.1; // px; below this the ring is considered arrived and the loop idles
 const INTERACTIVE = 'a, button, [data-tilt]';
 
 export function initCursor() {
@@ -13,7 +14,7 @@ export function initCursor() {
     x += (tx - x) * LERP;
     y += (ty - y) * LERP;
     ring.style.translate = `${x}px ${y}px`;
-    frame = requestAnimationFrame(tick);
+    frame = Math.abs(tx - x) + Math.abs(ty - y) < SETTLE ? 0 : requestAnimationFrame(tick);
   }
 
   function hide() {
@@ -28,9 +29,11 @@ export function initCursor() {
       tx = e.clientX;
       ty = e.clientY;
       if (frame) return;
-      x = tx; // first move, or re-entering the page: start under the pointer instead of sweeping in
-      y = ty;
-      ring.classList.add('is-visible');
+      if (!ring.classList.contains('is-visible')) {
+        x = tx; // first move, or re-entering the page: start under the pointer instead of sweeping in
+        y = ty;
+        ring.classList.add('is-visible');
+      }
       tick();
     },
     { passive: true }

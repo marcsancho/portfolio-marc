@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css" />
     <script>
       // Inline on purpose: it must run before first paint, which a deferred module cannot do.
+      document.documentElement.classList.add('js');
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches && innerWidth >= 768)
         document.documentElement.classList.add('hero-anim');
     </script>
