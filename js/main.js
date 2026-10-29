@@ -17,9 +17,13 @@ const groups = [...document.querySelectorAll('ul[data-group]')].map((ul) => ({
   items: [...ul.children].map((li) => ({
     label: li.textContent.trim(),
     size: Number(li.dataset.size),
+    note: li.dataset.note,
   })),
 }));
-initConstellation(document.querySelector('.skills-canvas'), groups, { drift: prefs.motion });
+initConstellation(document.querySelector('.skills-canvas'), groups, {
+  drift: prefs.motion,
+  detail: document.querySelector('.skills-detail'),
+});
 
 document.documentElement.dataset.pointer = prefs.fine ? 'fine' : 'coarse';
 initHeroGrid(document.querySelector('.hero-canvas'), { animate: prefs.fine && prefs.motion });

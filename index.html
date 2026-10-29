@@ -313,55 +313,78 @@
       <section id="skills">
         <div class="container">
           <h2 data-reveal>Skills</h2>
+          <p class="section-intro" data-reveal>
+            Five clusters, one hub each. Node size is depth of experience; hover a node for where I
+            have used it.
+          </p>
           <canvas class="skills-canvas" aria-hidden="true" data-reveal></canvas>
+          <p class="skills-detail" aria-live="polite">
+            Hover a node — size means depth of experience.
+          </p>
           <div class="skills-list">
             <div class="skills-group">
               <h3>Frameworks</h3>
               <ul data-group="Frameworks">
-                <li data-size="3">Angular</li>
-                <li data-size="3">ExtJS</li>
-                <li data-size="2">React</li>
-                <li data-size="2">Next.js</li>
-                <li data-size="2">Electron</li>
-                <li data-size="1">Vue</li>
+                <li data-size="3" data-note="daily since 2023: Knowledge widgets and apps">
+                  Angular
+                </li>
+                <li data-size="3" data-note="the product's main client, a very large codebase">
+                  ExtJS
+                </li>
+                <li data-size="2" data-note="the Chrome/Edge extension and side projects">React</li>
+                <li data-size="2" data-note="Casal de Colònies, packaged with Electron">Next.js</li>
+                <li data-size="2" data-note="Casal de Colònies: portable, offline desktop build">
+                  Electron
+                </li>
+                <li data-size="1" data-note="student project">Vue</li>
               </ul>
             </div>
             <div class="skills-group">
               <h3>Languages</h3>
               <ul data-group="Languages">
-                <li data-size="3">TypeScript</li>
-                <li data-size="3">JavaScript</li>
-                <li data-size="3">HTML5</li>
-                <li data-size="3">CSS3</li>
-                <li data-size="2">SCSS</li>
+                <li data-size="3" data-note="everything since 2023 is typed">TypeScript</li>
+                <li data-size="3" data-note="this site is hand-written JS modules">JavaScript</li>
+                <li data-size="3" data-note="semantic, accessible markup">HTML5</li>
+                <li data-size="3" data-note="this site is hand-written CSS, no framework">CSS3</li>
+                <li data-size="2" data-note="Angular and ExtJS theming">SCSS</li>
               </ul>
             </div>
             <div class="skills-group">
               <h3>Tooling</h3>
               <ul data-group="Tooling">
-                <li data-size="3">NX monorepo</li>
-                <li data-size="3">Git</li>
-                <li data-size="3">Azure DevOps</li>
-                <li data-size="2">GitHub</li>
-                <li data-size="2">CI/CD</li>
+                <li data-size="3" data-note="shared libraries, package flows, affected builds">
+                  NX monorepo
+                </li>
+                <li data-size="3" data-note="branching, history hygiene, migrations">Git</li>
+                <li data-size="3" data-note="repos, pipelines, migrations from Jenkins/Jira/GitHub">
+                  Azure DevOps
+                </li>
+                <li data-size="2" data-note="personal projects and repository migrations">
+                  GitHub
+                </li>
+                <li data-size="2" data-note="pipelines for widgets and apps">CI/CD</li>
               </ul>
             </div>
             <div class="skills-group">
               <h3>Testing</h3>
               <ul data-group="Testing">
-                <li data-size="2">Playwright</li>
-                <li data-size="2">Jest</li>
-                <li data-size="1">Vitest</li>
+                <li data-size="2" data-note="end-to-end for widgets and for Casal">Playwright</li>
+                <li data-size="2" data-note="unit tests in Angular">Jest</li>
+                <li data-size="1" data-note="Casal de Colònies">Vitest</li>
               </ul>
             </div>
             <div class="skills-group">
               <h3>AI</h3>
               <ul data-group="AI">
-                <li data-size="3">AI agents</li>
-                <li data-size="3">Agent harness &amp; orchestration</li>
-                <li data-size="2">Claude Code</li>
-                <li data-size="2">MCP</li>
-                <li data-size="2">OpenSpec</li>
+                <li data-size="3" data-note="directing agents on real tickets, every day">
+                  AI agents
+                </li>
+                <li data-size="3" data-note="role commands in knowledge-meta, MCP to Azure DevOps">
+                  Agent harness
+                </li>
+                <li data-size="2" data-note="main driver of the harness">Claude Code</li>
+                <li data-size="2" data-note="Azure DevOps, Snyk and repo access for agents">MCP</li>
+                <li data-size="2" data-note="107 requirements across 14 repositories">OpenSpec</li>
               </ul>
             </div>
           </div>
@@ -488,7 +511,7 @@
               >
                 <span class="contact-main">
                   <span class="contact-label">LinkedIn</span>
-                  <span class="contact-value">linkedin.com/in/marcsanchosantandreu</span>
+                  <span class="contact-value">/in/marcsanchosantandreu</span>
                 </span>
                 <svg
                   class="contact-arrow"

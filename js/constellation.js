@@ -1,129 +1,194 @@
-const RADIUS = { 1: 5, 2: 8, 3: 12 };
-const AMPLITUDE = 12; // px of sinusoidal wander around each node's home point
-const HIT_SLOP = 8; // px beyond the node radius that still counts as hovering it
-const DIM_ALPHA = 0.35;
-const LINE_ALPHA = 0.6;
+// Skills as labelled clusters: one cluster per group, every node named, the biggest node
+// of each group is its hub. Hovering a node writes its note into the detail element.
+const RADIUS = { 1: 4, 2: 6, 3: 9 };
+const LEVEL = { 1: 'Familiar', 2: 'Solid', 3: 'Expert' };
+const CELL_H = 270; // px per cluster row
+const RING = [0, 52, 98]; // px: hub at the centre, then an inner and an outer ring
+const INNER_MAX = 3; // nodes on the inner ring
+const AMPLITUDE = 4; // px of sinusoidal wander
+const DIM_ALPHA = 0.3;
+const FONT = 12;
 
-export function initConstellation(canvas, groups, { drift }) {
+export function initConstellation(canvas, groups, { drift, detail }) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const css = getComputedStyle(document.documentElement);
   const color = (name) => css.getPropertyValue(name).trim();
-  const [mint, mintLight, teal, text, bg, mono] = [
+  const [mint, mintLight, teal, tealLight, text, muted, bg, mono] = [
     '--mint',
     '--mint-light',
     '--teal',
+    '--teal-light',
     '--text',
+    '--text-muted',
     '--raised',
     '--font-mono',
   ].map(color);
+  const idleText = detail?.textContent ?? '';
 
-  // Offsets are unit-disc fractions, so layout rescales with the canvas.
-  const nodes = groups.flatMap((group, g) =>
-    group.items.map((item) => {
-      const a = Math.random() * Math.PI * 2;
-      const r = Math.sqrt(Math.random());
+  const clusters = groups.map((group, g) => {
+    const items = [...group.items].sort((a, b) => b.size - a.size);
+    const nodes = items.map((item, i) => {
+      const ring = i === 0 ? 0 : i <= INNER_MAX ? 1 : 2;
+      const first = ring === 1 ? 1 : INNER_MAX + 1;
+      const count = ring === 1 ? Math.min(items.length - 1, INNER_MAX) : items.length - first;
+      const index = i - first;
+      // Spread evenly; the inner ring is rotated half a step so no node sits on the hub's label.
+      const angle = ring ? (index / count) * Math.PI * 2 + (ring === 1 ? Math.PI / count : 0) : 0;
       return {
         g,
         label: item.label,
+        note: item.note,
+        size: item.size,
         radius: RADIUS[item.size] ?? RADIUS[1],
-        ox: Math.cos(a) * r,
-        oy: Math.sin(a) * r,
+        angle,
+        dist: RING[ring],
         phase: Math.random() * Math.PI * 2,
-        speed: 0.6 + Math.random() * 0.8,
-        hx: 0,
-        hy: 0,
         x: 0,
         y: 0,
       };
-    })
-  );
+    });
+    return { name: group.name, nodes, cx: 0, cy: 0 };
+  });
+  const nodes = clusters.flatMap((c) => c.nodes);
 
   let w = 0;
   let h = 0;
-  let groupR = 0;
   let pointer = null;
+  let hovered = null;
   let visible = true;
   let raf = 0;
 
   function layout() {
     const dpr = window.devicePixelRatio || 1;
     w = canvas.clientWidth;
-    h = canvas.clientHeight;
+    const cols = w >= 900 ? 3 : 2;
+    const rows = Math.ceil(clusters.length / cols);
+    h = rows * CELL_H;
+    canvas.style.height = `${h}px`;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // Margin keeps wander (AMPLITUDE) and the biggest node inside the canvas.
-    const margin = AMPLITUDE + RADIUS[3] + 4;
-    groupR = Math.min(w, h) * 0.16;
-    const rx = Math.max(0, w / 2 - margin - groupR);
-    const ry = Math.max(0, h / 2 - margin - groupR);
-    for (const n of nodes) {
-      const a = -Math.PI / 2 + (n.g * Math.PI * 2) / groups.length;
-      n.hx = w / 2 + Math.cos(a) * rx + n.ox * groupR;
-      n.hy = h / 2 + Math.sin(a) * ry + n.oy * groupR;
+    clusters.forEach((c, i) => {
+      const row = Math.floor(i / cols);
+      const inRow = Math.min(cols, clusters.length - row * cols);
+      const col = i - row * cols;
+      c.cx = (w / inRow) * (col + 0.5);
+      c.cy = CELL_H * (row + 0.5) + 10;
+    });
+  }
+
+  function place(t) {
+    for (const c of clusters) {
+      for (const n of c.nodes) {
+        const wobble = Math.sin(t * 0.0005 + n.phase) * AMPLITUDE;
+        n.x = c.cx + Math.cos(n.angle) * (n.dist + wobble);
+        n.y = c.cy + Math.sin(n.angle) * (n.dist + wobble);
+      }
     }
   }
 
-  function draw(t = 0) {
-    ctx.clearRect(0, 0, w, h);
-    for (const n of nodes) {
-      n.x = n.hx + Math.sin(t * 0.0004 * n.speed + n.phase) * AMPLITUDE;
-      n.y = n.hy + Math.cos(t * 0.0003 * n.speed + n.phase * 1.7) * AMPLITUDE;
-    }
+  function labelBox(n) {
+    ctx.font = `${FONT}px ${mono}`;
+    const width = ctx.measureText(n.label).width;
+    const right = Math.cos(n.angle) >= 0;
+    const gap = n.radius + 6;
+    const x = right ? n.x + gap : n.x - gap - width;
+    return { x, y: n.y - FONT / 2, width, height: FONT, right };
+  }
 
-    let hovered = null;
-    if (pointer) {
-      let best = Infinity;
-      for (const n of nodes) {
-        const d = Math.hypot(n.x - pointer.x, n.y - pointer.y);
-        if (d <= n.radius + HIT_SLOP && d < best) [hovered, best] = [n, d];
-      }
+  function pick() {
+    if (!pointer) return null;
+    for (const n of nodes) {
+      if (Math.hypot(n.x - pointer.x, n.y - pointer.y) <= n.radius + 6) return n;
+      const b = labelBox(n);
+      if (
+        pointer.x >= b.x - 4 &&
+        pointer.x <= b.x + b.width + 4 &&
+        pointer.y >= b.y - 3 &&
+        pointer.y <= b.y + b.height + 3
+      )
+        return n;
+    }
+    return null;
+  }
+
+  function draw(t = 0) {
+    place(t);
+    const next = pick();
+    if (next !== hovered) {
+      hovered = next;
+      if (detail)
+        detail.textContent = hovered
+          ? `${hovered.label} — ${LEVEL[hovered.size]}${hovered.note ? ` · ${hovered.note}` : ''}`
+          : idleText;
     }
     const alphaOf = (g) => (hovered && hovered.g !== g ? DIM_ALPHA : 1);
 
-    ctx.strokeStyle = teal;
+    ctx.clearRect(0, 0, w, h);
     ctx.lineWidth = 1;
-    const reach = groupR * 2 + 30;
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i];
-        const b = nodes[j];
-        if (a.g !== b.g) continue;
-        const near = 1 - Math.hypot(a.x - b.x, a.y - b.y) / reach;
-        if (near <= 0) continue;
-        ctx.globalAlpha = near * LINE_ALPHA * alphaOf(a.g);
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
+
+    for (const c of clusters) {
+      const [hub, ...rest] = c.nodes;
+      ctx.globalAlpha = alphaOf(hub.g);
+
+      // Cluster boundary and caption.
+      ctx.setLineDash([3, 5]);
+      ctx.strokeStyle = teal;
+      ctx.globalAlpha = 0.18 * alphaOf(hub.g);
+      ctx.beginPath();
+      ctx.arc(c.cx, c.cy, RING[2] + 24, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.globalAlpha = alphaOf(hub.g);
+      ctx.fillStyle = tealLight;
+      ctx.font = `600 11px ${mono}`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(c.name.toUpperCase(), c.cx, c.cy - RING[2] - 38);
+
+      // Star lines from every node to the hub.
+      ctx.strokeStyle = teal;
+      ctx.globalAlpha = 0.45 * alphaOf(hub.g);
+      ctx.beginPath();
+      for (const n of rest) {
+        ctx.moveTo(hub.x, hub.y);
+        ctx.lineTo(n.x, n.y);
       }
+      ctx.stroke();
     }
 
     for (const n of nodes) {
-      ctx.globalAlpha = alphaOf(n.g);
-      ctx.fillStyle = n === hovered ? mintLight : mint;
+      const a = alphaOf(n.g);
+      const lit = n === hovered;
+      if (n.size === 3 || lit) {
+        const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.radius * 3);
+        halo.addColorStop(0, mint);
+        halo.addColorStop(1, 'transparent');
+        ctx.globalAlpha = (lit ? 0.5 : 0.25) * a;
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius * 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = a;
+      ctx.fillStyle = lit ? mintLight : mint;
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
       ctx.fill();
-    }
 
-    ctx.globalAlpha = 1;
-    if (hovered) {
-      ctx.font = `13px ${mono}`;
+      const b = labelBox(n);
+      ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
-      const width = ctx.measureText(hovered.label).width;
-      const gap = hovered.radius + 6;
-      const flip = hovered.x + gap + width > w; // keep the label inside the canvas
-      ctx.textAlign = flip ? 'right' : 'left';
-      const x = hovered.x + (flip ? -gap : gap);
-      ctx.lineWidth = 4;
       ctx.lineJoin = 'round';
+      ctx.lineWidth = 3;
       ctx.strokeStyle = bg;
-      ctx.strokeText(hovered.label, x, hovered.y);
-      ctx.fillStyle = text;
-      ctx.fillText(hovered.label, x, hovered.y);
+      ctx.strokeText(n.label, b.x, n.y);
+      ctx.fillStyle = lit ? text : n.size === 3 ? text : muted;
+      ctx.fillText(n.label, b.x, n.y);
     }
+    ctx.globalAlpha = 1;
   }
 
   function loop(t) {
@@ -136,7 +201,7 @@ export function initConstellation(canvas, groups, { drift }) {
   }
 
   const redraw = () => {
-    if (!raf) draw(drift ? performance.now() : 0); // t = 0 keeps static nodes from jumping on hover
+    if (!raf) draw(drift ? performance.now() : 0);
   };
 
   canvas.addEventListener('pointermove', (e) => {
@@ -150,6 +215,7 @@ export function initConstellation(canvas, groups, { drift }) {
   });
 
   new ResizeObserver(() => {
+    if (!canvas.clientWidth) return; // hidden on narrow screens; the HTML list shows instead
     layout();
     redraw();
   }).observe(canvas.parentElement);
