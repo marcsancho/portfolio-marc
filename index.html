@@ -174,7 +174,101 @@
 
       <section id="project">
         <div class="container">
-          <h2>Casal de Colònies</h2>
+          <div class="case-study">
+            <header class="case-header">
+              <h2>Casal de Colònies — booking management for a summer camp</h2>
+              <p class="case-client">
+                Built for a camp in Colònia de Sant Pere, Mallorca. In production.
+              </p>
+            </header>
+
+            <div class="case-row">
+              <figure class="screen" data-tilt data-reveal>
+                <img
+                  src="assets/casal/casal-inici.webp"
+                  width="1440"
+                  height="800"
+                  loading="lazy"
+                  alt="Dashboard with a first-run checklist, season KPIs, upcoming arrivals and an occupancy calendar"
+                />
+                <figcaption>
+                  The dashboard: checklist, season KPIs and occupancy calendar.
+                </figcaption>
+              </figure>
+              <div class="case-text">
+                <h3>The problem</h3>
+                <p>
+                  A small camp managed its school group bookings for each season by hand.
+                  Agreements, annexes, deadlines and occupancy were spread over documents and email.
+                </p>
+                <h3>The solution</h3>
+                <p>
+                  A portable desktop app that runs from a USB stick on any Windows machine, with no
+                  server and no installation. It manages schools and bookings and tracks the status
+                  of each booking: agreement sent, waiting for Annex 1, confirmed. It generates the
+                  booking agreement and Annex 1 as PDFs from customisable templates and emails them
+                  through the client's Gmail account. It also shows an occupancy calendar and
+                  upcoming deadlines, and includes a first-run checklist and a built-in manual.
+                </p>
+              </div>
+            </div>
+
+            <div class="case-row">
+              <figure class="screen" data-tilt data-reveal>
+                <img
+                  src="assets/casal/casal-reserva.webp"
+                  width="1440"
+                  height="778"
+                  loading="lazy"
+                  alt="Booking form with the school, status, stay dates, reserved places, prices and the meals included in full board"
+                />
+                <figcaption>The booking form.</figcaption>
+              </figure>
+              <div class="case-text">
+                <h3>The technical challenge</h3>
+                <p>
+                  The app had to be portable and work offline. Electron packages a Next.js app, and
+                  the data lives in a local SQLite database through sql.js. Authentication is dual:
+                  Google sign-in when online and “continue offline” when not. Google OAuth had to
+                  work from a desktop app, and a documented migration path covers legacy data.
+                </p>
+              </div>
+            </div>
+
+            <div class="case-row">
+              <figure class="screen" data-tilt data-reveal>
+                <img
+                  src="assets/casal/casal-acord.webp"
+                  width="1440"
+                  height="771"
+                  loading="lazy"
+                  alt="Preview of the generated booking agreement PDF, with options to download, print or send it by email"
+                />
+                <figcaption>
+                  The generated booking agreement, ready to download, print or send.
+                </figcaption>
+              </figure>
+              <div class="case-text">
+                <h3>Delivered to a real client</h3>
+                <p>
+                  This is not a demo. It was built for a real client and is in production, from
+                  requirements through delivery and support.
+                </p>
+              </div>
+            </div>
+
+            <p class="case-stack">
+              <code>Next.js</code>
+              <code>TypeScript</code>
+              <code>Electron</code>
+              <code>Tailwind CSS</code>
+              <code>sql.js (SQLite)</code>
+              <code>Gmail API</code>
+              <code>Playwright</code>
+              <code>Vitest</code>
+            </p>
+            <p class="case-note">UI in Catalan, the client's language.</p>
+          </div>
         </div>
       </section>
 

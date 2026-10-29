@@ -420,6 +420,77 @@ html.hero-anim .site-nav {
   margin-left: -1.25rem;
 }
 
+/* Casal de Colònies case study */
+.case-client {
+  margin-top: 0.75rem;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.case-row {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.screen {
+  background: var(--raised);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, black 60%, transparent);
+  overflow: hidden;
+}
+
+.screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screen figcaption {
+  padding: 0.5rem 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.case-text h3 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--mint);
+}
+
+.case-text p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}
+
+.case-text h3:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.case-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 3rem;
+}
+
+.case-stack code {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.case-note {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
 @media (min-width: 768px) {
   .timeline-item {
     display: grid;
@@ -463,5 +534,21 @@ html.hero-anim .site-nav {
 
   .hero-actions {
     flex-direction: row;
+  }
+}
+
+@media (min-width: 900px) {
+  .case-row {
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .case-row:nth-of-type(even) {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .case-row:nth-of-type(even) .screen {
+    order: 2;
   }
 }
