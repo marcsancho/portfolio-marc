@@ -6,6 +6,11 @@
     <title>Marc Sancho — Front-end Developer</title>
     <link rel="icon" href="assets/icon.png" />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Inline on purpose: it must run before first paint, which a deferred module cannot do.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && innerWidth >= 768)
+        document.documentElement.classList.add('hero-anim');
+    </script>
     <script type="module" src="js/main.js"></script>
   </head>
   <body>

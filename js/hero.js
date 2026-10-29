@@ -37,7 +37,10 @@ function highlight(line) {
 }
 
 export function initHero({ enabled }) {
-  if (!enabled) return;
+  if (!enabled) {
+    document.documentElement.classList.remove('hero-anim');
+    return;
+  }
 
   const editor = document.querySelector('.hero-editor');
   const nav = document.querySelector('.site-nav');
@@ -57,6 +60,7 @@ export function initHero({ enabled }) {
 
   nav.classList.add('is-hidden');
   els.forEach((el) => el.classList.add('is-pending'));
+  document.documentElement.classList.remove('hero-anim'); // same tick: is-pending takes over unpainted
   editor.hidden = false;
 
   let line = 0;
