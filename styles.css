@@ -86,7 +86,7 @@ h2 {
 .site-header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-wrap: wrap;
   gap: 0.75rem 1.5rem;
   padding-block: 0.75rem;
@@ -673,7 +673,9 @@ html.hero-anim .site-nav {
       transparent 70%
     ),
     var(--surface);
-  border: 1px solid var(--raised);
+  /* Outline, not border: the backing store must equal the CSS box or text blurs. */
+  outline: 1px solid var(--raised);
+  outline-offset: -1px;
   border-radius: 16px;
 }
 

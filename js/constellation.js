@@ -14,11 +14,10 @@ export function initConstellation(canvas, groups, { drift, detail }) {
   const ctx = canvas.getContext('2d');
   const css = getComputedStyle(document.documentElement);
   const color = (name) => css.getPropertyValue(name).trim();
-  const [mint, mintLight, teal, tealLight, text, muted, bg, mono] = [
+  const [mint, mintLight, teal, text, muted, bg, mono] = [
     '--mint',
     '--mint-light',
     '--teal',
-    '--teal-light',
     '--text',
     '--text-muted',
     '--raised',
@@ -64,10 +63,13 @@ export function initConstellation(canvas, groups, { drift, detail }) {
 
   function layout() {
     const dpr = window.devicePixelRatio || 1;
-    w = canvas.clientWidth;
+    // Whole CSS pixels and a matching backing store, or the browser resamples and text blurs.
+    canvas.style.width = '100%';
+    w = Math.floor(canvas.getBoundingClientRect().width);
     const cols = w >= 900 ? 3 : 2;
     const rows = Math.ceil(clusters.length / cols);
     h = rows * CELL_H;
+    canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
@@ -136,7 +138,7 @@ export function initConstellation(canvas, groups, { drift, detail }) {
       const [hub, ...rest] = c.nodes;
       ctx.globalAlpha = alphaOf(hub.g);
 
-      // Cluster boundary and caption.
+      // Cluster boundary.
       ctx.setLineDash([3, 5]);
       ctx.strokeStyle = teal;
       ctx.globalAlpha = 0.18 * alphaOf(hub.g);
@@ -144,13 +146,6 @@ export function initConstellation(canvas, groups, { drift, detail }) {
       ctx.arc(c.cx, c.cy, RING[2] + 24, 0, Math.PI * 2);
       ctx.stroke();
       ctx.setLineDash([]);
-
-      ctx.globalAlpha = alphaOf(hub.g);
-      ctx.fillStyle = tealLight;
-      ctx.font = `600 11px ${mono}`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(c.name.toUpperCase(), c.cx, c.cy - RING[2] - 38);
 
       // Star lines from every node to the hub.
       ctx.strokeStyle = teal;
@@ -186,7 +181,7 @@ export function initConstellation(canvas, groups, { drift, detail }) {
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       ctx.lineJoin = 'round';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 2;
       ctx.strokeStyle = bg;
       ctx.strokeText(n.label, b.x, b.y + FONT / 2);
       ctx.fillStyle = lit ? text : n.size === 3 ? text : muted;

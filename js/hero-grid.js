@@ -20,8 +20,10 @@ export function initHeroGrid(canvas, { animate }) {
 
   function layout() {
     const dpr = window.devicePixelRatio || 1;
-    w = canvas.clientWidth;
-    h = canvas.clientHeight;
+    w = Math.floor(host.clientWidth);
+    h = Math.floor(host.clientHeight);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
