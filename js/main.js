@@ -1,7 +1,6 @@
 import { prefs } from './prefs.js';
 import { initHero } from './hero.js';
 import { initHeroGrid } from './hero-grid.js';
-import { initMagnetic } from './magnetic.js';
 import { initConstellation } from './constellation.js';
 import { initContact } from './contact.js';
 import { initReveal } from './reveal.js';
@@ -30,6 +29,5 @@ initHeroGrid(document.querySelector('.hero-canvas'), { animate: prefs.fine && pr
 
 if (prefs.fine && prefs.motion) {
   initTilt('[data-tilt]');
-  initMagnetic('.hero-actions .btn');
   initCursor();
 }

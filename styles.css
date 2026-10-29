@@ -267,17 +267,18 @@ html[data-pointer] #hero::before {
 }
 
 .hero-content h1 {
-  background: linear-gradient(90deg, var(--mint), var(--teal-light));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
   width: fit-content;
   max-width: 100%;
 }
 
-/* Each letter lifts on hover; inline-block so it can move without breaking the gradient clip. */
+/* The gradient is clipped per letter: a moving letter gets its own compositing layer, where a
+   clip set on the parent would no longer reach and the letter would vanish. */
 .ch {
   display: inline-block;
+  background: linear-gradient(90deg, var(--mint), var(--teal-light));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   transition:
     translate 0.25s,
     rotate 0.25s;
@@ -319,9 +320,7 @@ html[data-pointer='fine'] .ch:hover {
   border-radius: 0.5rem;
   font-weight: 600;
   text-decoration: none;
-  transition:
-    translate 0.15s ease-out,
-    background 0.15s;
+  transition: background 0.15s;
 }
 
 .btn-primary {

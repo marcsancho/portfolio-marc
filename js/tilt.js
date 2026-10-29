@@ -1,7 +1,9 @@
 const clamp = (v, max) => Math.max(-max, Math.min(max, v));
 
-export function initTilt(selector, { max = 8 } = {}) {
+// `data-tilt="8"` overrides the default maximum angle for that element.
+export function initTilt(selector, { max = 4 } = {}) {
   document.querySelectorAll(selector).forEach((el) => {
+    const limit = Number(el.dataset.tilt) || max;
     let rect;
     const set = (rx, ry, gx, gy) => {
       el.style.setProperty('--rx', `${rx}deg`);
@@ -19,7 +21,12 @@ export function initTilt(selector, { max = 8 } = {}) {
         if (!rect) return;
         const px = (e.clientX - rect.left) / rect.width;
         const py = (e.clientY - rect.top) / rect.height;
-        set(clamp((0.5 - py) * 2 * max, max), clamp((px - 0.5) * 2 * max, max), px * 100, py * 100);
+        set(
+          clamp((0.5 - py) * 2 * limit, limit),
+          clamp((px - 0.5) * 2 * limit, limit),
+          px * 100,
+          py * 100
+        );
       },
       { passive: true }
     );
