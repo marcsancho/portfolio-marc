@@ -33,8 +33,11 @@ export function initConstellation(canvas, groups, { drift, detail }) {
       const first = ring === 1 ? 1 : INNER_MAX + 1;
       const count = ring === 1 ? Math.min(items.length - 1, INNER_MAX) : items.length - first;
       const index = i - first;
-      // Spread evenly; the inner ring is rotated half a step so no node sits on the hub's label.
-      const angle = ring ? (index / count) * Math.PI * 2 + (ring === 1 ? Math.PI / count : 0) : 0;
+      // Spread evenly, rotated half a step so no node sits on the hub's label; the inner ring
+      // gets an extra twist so it never shares the horizontal axis with the outer ring.
+      const angle = ring
+        ? (index / count) * Math.PI * 2 + Math.PI / count + (ring === 1 ? Math.PI / 6 : 0)
+        : 0;
       return {
         g,
         label: item.label,
@@ -91,10 +94,11 @@ export function initConstellation(canvas, groups, { drift, detail }) {
   function labelBox(n) {
     ctx.font = `${FONT}px ${mono}`;
     const width = ctx.measureText(n.label).width;
-    const right = Math.cos(n.angle) >= 0;
+    if (!n.dist)
+      return { x: n.x - width / 2, y: n.y + n.radius + 14 - FONT / 2, width, height: FONT };
     const gap = n.radius + 6;
-    const x = right ? n.x + gap : n.x - gap - width;
-    return { x, y: n.y - FONT / 2, width, height: FONT, right };
+    const right = Math.cos(n.angle) >= 0 && n.x + gap + width <= w - 4; // flip before the edge
+    return { x: right ? n.x + gap : n.x - gap - width, y: n.y - FONT / 2, width, height: FONT };
   }
 
   function pick() {
@@ -184,9 +188,9 @@ export function initConstellation(canvas, groups, { drift, detail }) {
       ctx.lineJoin = 'round';
       ctx.lineWidth = 3;
       ctx.strokeStyle = bg;
-      ctx.strokeText(n.label, b.x, n.y);
+      ctx.strokeText(n.label, b.x, b.y + FONT / 2);
       ctx.fillStyle = lit ? text : n.size === 3 ? text : muted;
-      ctx.fillText(n.label, b.x, n.y);
+      ctx.fillText(n.label, b.x, b.y + FONT / 2);
     }
     ctx.globalAlpha = 1;
   }
