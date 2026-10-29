@@ -1,5 +1,5 @@
-// Timing: leading indentation is typed instantly, so 237 typed chars * 5 ms + 10 lines * 180 ms
-// = 3.0 s (measured ~3.4 s with timer overhead), plus the 400 ms fade = under 4 s.
+// Timing: leading indentation is typed instantly, so total ≈ typed chars * CHAR_MS + lines * LINE_MS,
+// plus the 400 ms fade. Keep it under 4 s when editing the snippet.
 const CHAR_MS = 5;
 const LINE_MS = 180;
 
@@ -45,6 +45,7 @@ export function initHero({ enabled }) {
   const editor = document.querySelector('.hero-editor');
   const nav = document.querySelector('.site-nav');
   const els = [...document.querySelectorAll('[data-hero-el]')];
+  const byKey = new Map(els.map((el) => [el.dataset.heroEl, el]));
 
   editor.innerHTML =
     '<div class="hero-editor__bar"><span>index.html</span>' +
@@ -99,9 +100,7 @@ export function initHero({ enabled }) {
     }
     done.insertAdjacentHTML('beforeend', highlight(text) + '\n');
     cur.nodeValue = '';
-    if (reveals) {
-      document.querySelector(`[data-hero-el="${reveals}"]`).classList.remove('is-pending');
-    }
+    byKey.get(reveals)?.classList.remove('is-pending');
     line++;
     timer = setTimeout(line < SNIPPET.length ? startLine : finish, LINE_MS);
   }

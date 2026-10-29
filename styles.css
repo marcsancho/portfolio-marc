@@ -331,8 +331,9 @@ h2 {
     transform 500ms;
 }
 
-/* Hides the hero before the module runs; the animation un-hides it if the module never loads. */
-html.hero-anim [data-hero-el] {
+/* Hides the hero and nav before the module runs; the animation un-hides it if the module never loads. */
+html.hero-anim [data-hero-el],
+html.hero-anim .site-nav {
   opacity: 0;
   animation: hero-fallback 0s 5s forwards;
 }
