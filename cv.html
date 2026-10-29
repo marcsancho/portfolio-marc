@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marc Sancho — CV</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/icon.png" />
+    <style>
+      /* Printed on white; the portfolio's mint and teal only as accents. */
+      :root {
+        --ink: #161616;
+        --muted: #555;
+        --line: #e3e3e3;
+        --mint: #4f9c74;
+        --teal: #3a7078;
+        --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        --font-mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+      }
+
+      @page {
+        size: A4;
+        margin: 12mm 14mm;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html {
+        color-scheme: light;
+      }
+
+      body {
+        max-width: 182mm;
+        margin: 0 auto;
+        padding: 12mm 0;
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 10pt;
+        line-height: 1.4;
+        background: #fff;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6mm;
+        align-items: center;
+        padding-bottom: 4mm;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      h1 {
+        font-size: 22pt;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+
+      .role {
+        margin-top: 1mm;
+        font-family: var(--font-mono);
+        font-size: 10.5pt;
+        color: var(--mint);
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 4mm;
+        margin-top: 2.5mm;
+        font-size: 9pt;
+        color: var(--muted);
+      }
+
+      .photo {
+        width: 24mm;
+        height: 24mm;
+        border-radius: 4mm;
+        object-fit: cover;
+      }
+
+      section {
+        margin-top: 4.5mm;
+      }
+
+      h2 {
+        margin-bottom: 1.5mm;
+        font-family: var(--font-mono);
+        font-size: 8.5pt;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal);
+      }
+
+      .profile {
+        font-size: 10.5pt;
+      }
+
+      .job {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 4mm;
+        align-items: baseline;
+      }
+
+      .job h3 {
+        font-size: 11pt;
+        font-weight: 700;
+      }
+
+      .job .where {
+        font-weight: 400;
+        color: var(--muted);
+      }
+
+      .when {
+        font-family: var(--font-mono);
+        font-size: 8.5pt;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      ul {
+        margin-top: 1.2mm;
+        padding-left: 4mm;
+      }
+
+      li + li {
+        margin-top: 0.8mm;
+      }
+
+      li.lead {
+        list-style: none;
+        margin-left: -4mm;
+        padding: 1.2mm 2.5mm;
+        border-left: 2.5px solid var(--mint);
+        background: #f3f8f5;
+      }
+
+      .project p {
+        margin-top: 0.8mm;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: 22mm 1fr;
+        gap: 0.8mm 3mm;
+      }
+
+      .skills dt {
+        font-family: var(--font-mono);
+        font-size: 8.5pt;
+        color: var(--muted);
+        padding-top: 0.3mm;
+      }
+
+      .skills dd {
+        margin: 0;
+      }
+
+      .two {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 6mm;
+      }
+
+      .edu li {
+        display: grid;
+        grid-template-columns: 20mm 1fr;
+        gap: 3mm;
+        list-style: none;
+      }
+
+      .edu ul {
+        padding: 0;
+      }
+
+      .edu small {
+        display: block;
+        color: var(--muted);
+      }
+
+      .footnote {
+        margin-top: 4mm;
+        padding-top: 2mm;
+        border-top: 1px solid var(--line);
+        font-size: 8.5pt;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Marc Sancho Santandreu</h1>
+        <p class="role">Front-end Developer · Angular &amp; ExtJS · AI-first</p>
+        <p class="contact">
+          <a href="mailto:marcsancho22@gmail.com">marcsancho22@gmail.com</a>
+          <a href="https://marcsancho.github.io/portfolio-marc/"
+            >marcsancho.github.io/portfolio-marc</a
+          >
+          <a href="https://www.linkedin.com/in/marcsanchosantandreu/"
+            >linkedin.com/in/marcsanchosantandreu</a
+          >
+          <a href="https://github.com/marcsancho">github.com/marcsancho</a>
+          <span>Palma de Mallorca, Spain</span>
+        </p>
+      </div>
+      <img class="photo" src="assets/profile.webp" width="640" height="640" alt="" />
+    </header>
+
+    <section>
+      <h2>Profile</h2>
+      <p class="profile">
+        Front-end developer with three years building large enterprise applications in Angular and
+        ExtJS at Serviceware, where I lead my team's shift to AI-first development: an agent
+        platform that plans, implements and reviews changes across our frontend repositories. I care
+        about work that is measured on real tickets, not demos, and about front-ends that stay fast
+        and accessible.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="job">
+        <h3>Front-end Developer <span class="where">· Serviceware, Palma (hybrid)</span></h3>
+        <span class="when">Mar 2023 — present</span>
+      </div>
+      <ul>
+        <li class="lead">
+          Lead the team's move to AI-first development: adopted the company's agent platform for the
+          Knowledge team and drive most of its evolution — role commands, MCP integration with Azure
+          DevOps, and OpenSpec as the single store of behaviour every repository follows.
+        </li>
+        <li>
+          Build and maintain the Serviceware Knowledge front-end: Angular widgets and applications
+          in an NX monorepo with shared libraries; daily work on the main client, a very large ExtJS
+          application.
+        </li>
+        <li>
+          Built a Chrome and Edge browser extension in React that brings Knowledge into other tools.
+        </li>
+        <li>
+          Own Azure DevOps for the front-end: repositories, branching, CI/CD pipelines and package
+          flows, including migrations from Jenkins, Jira and GitHub.
+        </li>
+        <li>
+          Automated tests with Playwright and Jest; code review and documentation across the
+          front-end projects. Internship Mar–Jun 2023, full-time since.
+        </li>
+      </ul>
+    </section>
+
+    <section class="project">
+      <h2>Project</h2>
+      <div class="job">
+        <h3>Casal de Colònies <span class="where">· booking management for a summer camp</span></h3>
+        <span class="when">2025 — present</span>
+      </div>
+      <p>
+        Portable desktop app (Next.js + Electron, SQLite via sql.js, Gmail API) for a camp in
+        Mallorca: school bookings, occupancy, deadlines and PDF agreements generated from templates
+        the client edits and maps itself. Delivered end to end and in production.
+      </p>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Front-end</dt>
+        <dd>Angular, ExtJS, React, Next.js, Electron · TypeScript, JavaScript, HTML, CSS/SCSS</dd>
+        <dt>Tooling</dt>
+        <dd>NX monorepo, Git, Azure DevOps, GitHub, CI/CD · Playwright, Jest, Vitest</dd>
+        <dt>AI</dt>
+        <dd>Agent orchestration, Claude Code, Codex, OpenCode, OpenRouter, MCP, OpenSpec</dd>
+      </dl>
+    </section>
+
+    <div class="two">
+      <section class="edu">
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <span class="when">2021 — 2023</span>
+            <span
+              >Higher Vocational Diploma, Web Development
+              <small>CIFP Francesc de Borja Moll</small></span
+            >
+          </li>
+          <li>
+            <span class="when">2019 — 2021</span>
+            <span
+              >Intermediate Vocational Diploma, Network &amp; Systems Administration
+              <small>IES Capdepera · Erasmus placement in Cork, Ireland</small></span
+            >
+          </li>
+          <li>
+            <span class="when">2025</span>
+            <span
+              >Google: Artificial Intelligence and Productivity
+              <small>Santander Open Academy</small></span
+            >
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Languages &amp; availability</h2>
+        <p>Spanish and Catalan, native · English, fluent.</p>
+        <p>Open to remote or hybrid roles · based in Palma de Mallorca.</p>
+      </section>
+    </div>
+
+    <p class="footnote">
+      Portfolio with the full case study and the AI work: marcsancho.github.io/portfolio-marc
+    </p>
+  </body>
+</html>

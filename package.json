@@ -5,7 +5,8 @@
   "scripts": {
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "start": "python -m http.server 8080"
+    "start": "python -m http.server 8080",
+    "cv:pdf": "\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=assets/Marc-Sancho-CV.pdf http://localhost:8080/cv.html"
   },
   "devDependencies": {
     "prettier": "^3.4.1"
