@@ -206,40 +206,6 @@ html[data-pointer='fine'] .hero-photo::after {
   display: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  /* The hero-fallback safety net needs no exemption: the inline head script never adds
-     html.hero-anim under reduced motion, so the hero is visible from the first paint. */
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  /* Same specificity as the hidden-until-revealed and tilt rules above, and later. */
-  html.js [data-reveal]:not(.is-visible) {
-    opacity: 1;
-    translate: none;
-  }
-
-  html[data-pointer] .ch:hover {
-    translate: none;
-    rotate: none;
-  }
-
-  .contact-row:hover .contact-arrow {
-    transform: none;
-  }
-
-  .cursor-ring {
-    display: none;
-  }
-}
-
 .skip-link {
   position: absolute;
   top: 0;
@@ -1003,5 +969,39 @@ html.hero-anim .site-nav {
 
   .case-row:nth-of-type(even) .screen {
     order: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The hero-fallback safety net needs no exemption: the inline head script never adds
+     html.hero-anim under reduced motion, so the hero is visible from the first paint. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Keep this block last in the file: it overrides rules of equal specificity by coming after them. */
+  html.js [data-reveal]:not(.is-visible) {
+    opacity: 1;
+    translate: none;
+  }
+
+  html[data-pointer] .ch:hover {
+    translate: none;
+    rotate: none;
+  }
+
+  .contact-row:hover .contact-arrow {
+    transform: none;
+  }
+
+  .cursor-ring {
+    display: none;
   }
 }
