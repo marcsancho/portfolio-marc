@@ -367,7 +367,7 @@ html[data-pointer='fine'] .ch:hover {
 /* Photo and editor share one grid cell: the editor types on top, then fades to reveal the photo. */
 .hero-visual {
   display: grid;
-  width: min(22rem, 100%);
+  width: 100%;
 }
 
 .hero-visual > * {
@@ -375,6 +375,8 @@ html[data-pointer='fine'] .ch:hover {
 }
 
 .hero-photo {
+  width: min(22rem, 100%);
+  justify-self: center;
   aspect-ratio: 1;
   border: 1px solid var(--raised);
   border-radius: 24px;
@@ -628,15 +630,6 @@ html.hero-anim .site-nav {
   margin-top: 3rem;
 }
 
-.case-stack code {
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--teal);
-  border-radius: 999px;
-  color: var(--teal-light);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-}
-
 .case-note {
   margin-top: 1rem;
   color: var(--text-muted);
@@ -692,6 +685,96 @@ html.hero-anim .site-nav {
   border-color: var(--mint);
   color: var(--mint);
   font-size: 1.05rem;
+}
+
+/* Working with AI */
+.section-intro {
+  margin-top: 1rem;
+  max-width: 38rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.ai-path {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.ai-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ai-step__n {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--teal-light);
+}
+
+.ai-step h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.ai-step p {
+  color: var(--text-muted);
+}
+
+.ai-step code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--mint);
+}
+
+.ai-lessons {
+  margin-top: 3rem;
+}
+
+.ai-lessons h3 {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--teal-light);
+}
+
+.ai-lessons ul {
+  display: grid;
+  gap: 1rem 2rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-lessons li {
+  padding-left: 1rem;
+  border-left: 3px solid var(--mint);
+  color: var(--text-muted);
+}
+
+.ai-lessons strong {
+  color: var(--text);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.chips code,
+.case-stack code {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  color: var(--teal-light);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
 }
 
 /* Contact */
@@ -820,6 +903,14 @@ html.hero-anim .site-nav {
 @media (min-width: 900px) {
   .skills-list {
     grid-template-columns: repeat(5, 1fr);
+  }
+
+  .ai-path {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ai-lessons ul {
+    grid-template-columns: 1fr 1fr;
   }
 
   .case-row {

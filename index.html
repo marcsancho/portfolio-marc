@@ -27,6 +27,7 @@
           <a href="#experience">Experience</a>
           <a href="#project">Project</a>
           <a href="#skills">Skills</a>
+          <a href="#ai">AI</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
@@ -360,9 +361,86 @@
                 <li data-size="3">Agent harness &amp; orchestration</li>
                 <li data-size="2">Claude Code</li>
                 <li data-size="2">MCP</li>
+                <li data-size="2">OpenSpec</li>
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="ai">
+        <div class="container">
+          <h2 data-reveal>Working with AI</h2>
+          <p class="section-intro" data-reveal>
+            Over the last two years most of my learning has gone into one question: how does a real
+            team ship with AI agents without losing control? This is the path so far.
+          </p>
+
+          <ol class="ai-path">
+            <li class="card ai-step" data-tilt data-reveal>
+              <span class="ai-step__n">01</span>
+              <h3>Assistants in the editor</h3>
+              <p>
+                Autocomplete and chat first. Great for boilerplate and tests, unreliable on a very
+                large ExtJS codebase it knew nothing about. First lesson: the model is only as good
+                as the context it gets.
+              </p>
+            </li>
+            <li class="card ai-step" data-tilt data-reveal>
+              <span class="ai-step__n">02</span>
+              <h3>Agents, models, side by side</h3>
+              <p>
+                Ran the same tickets through Codex, Claude Code and OpenCode, and routed many models
+                through OpenRouter to compare cost and quality. Added Jev, a non-LLM decision model,
+                for routing and classification where a chatbot is the wrong tool.
+              </p>
+            </li>
+            <li class="card ai-step" data-tilt data-reveal>
+              <span class="ai-step__n">03</span>
+              <h3>A harness for the whole team</h3>
+              <p>
+                Another team started a company meta-repo; the Knowledge team adopted it and I drive
+                most of what it became for us: role commands (<code>/support-</code>,
+                <code>/po-</code>, <code>/dev-</code>) that Claude Code runs, Azure DevOps and the
+                repos reached through MCP, and OpenSpec as the single store of behaviour — 10
+                capabilities and 107 requirements that 14 repositories follow.
+              </p>
+            </li>
+          </ol>
+
+          <div class="ai-lessons" data-reveal>
+            <h3>What I've learned</h3>
+            <ul>
+              <li>
+                <strong>Context beats model.</strong> The same model is useless or excellent
+                depending on what it is handed: specs, conventions, a map of the repos.
+              </li>
+              <li>
+                <strong>Reads are free, writes ask.</strong> Every command may read anything; every
+                write shows a numbered list and waits for a yes. Nobody fears the tool, and
+                everything it touches is marked ai-assisted.
+              </li>
+              <li>
+                <strong>Not every call needs an LLM.</strong> Routing and classification run faster
+                and cheaper on a decision model; generation is for text.
+              </li>
+              <li>
+                <strong>Measure on real tickets.</strong> One command, one real ticket per sprint,
+                and a feedback file in the repo. Demos prove nothing.
+              </li>
+            </ul>
+          </div>
+
+          <p class="chips" data-reveal>
+            <code>Claude Code</code>
+            <code>Codex</code>
+            <code>OpenCode</code>
+            <code>OpenRouter</code>
+            <code>Jev</code>
+            <code>MCP</code>
+            <code>OpenSpec</code>
+            <code>Claude Desktop</code>
+          </p>
         </div>
       </section>
 
